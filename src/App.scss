@@ -2,6 +2,22 @@
   &__title {
     text-align: center;
     color: #8209e4;
+    font-size: 30px;
+    font-weight: 700;
+  }
+  &__button {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    color: #ffffff;
+    background-color: #00118b;
+    width: 85px;
+    height: 35px;
+    &_asc {
+      margin-left: 10px;
+      background-color: #e70def;
+    }
   }
   &__table {
     width: 100%;
