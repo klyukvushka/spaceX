@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
 import "./App.scss";
-import Table from "./table";
+import Table from "./Table";
 import SearchForm from "./Search";
 import axios from "axios";
 
