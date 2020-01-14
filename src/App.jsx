@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactPaginate from "react-paginate";
 import "./App.scss";
 import Table from "./table";
+import SearchForm from "./Search";
 import axios from "axios";
 
 const instance = axios.create({
@@ -13,7 +14,7 @@ export default class App extends Component {
     data: [],
     offset: 0,
     elements: [],
-    perPage: 20,
+    perPage: 30,
     currentPage: 0
   };
 
@@ -60,8 +61,14 @@ export default class App extends Component {
     });
   };
 
+  updateElements = filteredData => {
+    this.setState({ elements: filteredData });
+  };
+
   render() {
     const { elements } = this.state;
+    const { data } = this.state;
+
     let paginationElement;
     if (this.state.pageCount > 1) {
       paginationElement = (
@@ -90,15 +97,18 @@ export default class App extends Component {
         <section className="launch">
           <div className="container">
             <h1 className="launch__title">SpaceX launches</h1>
-            <button onClick={this.sortDesc} className="launch__button">
-              Sort ↓
-            </button>
-            <button
-              onClick={this.sortAsc}
-              className="launch__button launch__button_asc"
-            >
-              Sort ↑
-            </button>
+            <div className="launch__top">
+              <div className="launch__group">
+                <button onClick={this.sortDesc} className="btn">
+                  Sort ↓
+                </button>
+                <button onClick={this.sortAsc} className="btn btn-asc">
+                  Sort ↑
+                </button>
+              </div>
+              <SearchForm data={data} updateElements={this.updateElements} />
+            </div>
+
             <Table data={elements} />
             {paginationElement}
           </div>

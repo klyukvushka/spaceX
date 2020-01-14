@@ -23,7 +23,7 @@ export default class Table extends Component {
       <table className="launch__table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Flight №</th>
             <th>Mission Name</th>
             <th>Date</th>
             <th>Rocket Name</th>
