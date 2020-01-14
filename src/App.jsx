@@ -11,23 +11,36 @@ const instance = axios.create({
 export default class App extends Component {
   state = {
     data: [],
+    offset: 0,
+    elements: [],
+    perPage: 20,
     currentPage: 0
   };
 
   componentDidMount = () => {
     instance.get().then(response => {
-      const data = response.data;
-      this.setState({ data });
+      this.setState(
+        {
+          data: response.data,
+          pageCount: Math.ceil(response.data.length / this.state.perPage)
+        },
+        () => this.setElementsForCurrentPage()
+      );
     });
   };
 
-  pageChangeHandler = ({ selected }) =>
-    this.setState({ currentPage: selected });
+  setElementsForCurrentPage() {
+    let elements = this.state.data.slice(
+      this.state.offset,
+      this.state.offset + this.state.perPage
+    );
+
+    this.setState({ elements: elements });
+  }
 
   sortDesc = () => {
     instance.get("?order=desc").then(response => {
       const data = response.data;
-
       this.setState({ data });
     });
   };
@@ -39,15 +52,39 @@ export default class App extends Component {
     });
   };
 
-  chunkArray = (arr, size) =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-      arr.slice(i * size, i * size + size)
-    );
+  handlePageClick = data => {
+    const selectedPage = data.selected;
+    const offset = selectedPage * this.state.perPage;
+    this.setState({ currentPage: selectedPage, offset: offset }, () => {
+      this.setElementsForCurrentPage();
+    });
+  };
 
   render() {
-    const { data } = this.state;
+    const { elements } = this.state;
+    let paginationElement;
+    if (this.state.pageCount > 1) {
+      paginationElement = (
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={this.state.pageCount}
+          onPageChange={this.handlePageClick}
+          containerClassName={"pagination"}
+          activeClassName={"active"}
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          nextClassName="page-item"
+          previousLinkClassName="page-link"
+          nextLinkClassName="page-link"
+          forcePage={this.state.currentPage}
+        />
+      );
+    }
 
-    const visibleData = this.chunkArray(data, 20);
     return (
       <main>
         <section className="launch">
@@ -62,26 +99,8 @@ export default class App extends Component {
             >
               Sort ↑
             </button>
-            <Table data={data} />
-            <ReactPaginate
-              previousLabel={"prev"}
-              nextLabel={"next"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={5}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={this.pageChangeHandler}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
-              pageClassName="page-item"
-              pageLinkClassName="page-link"
-              previousClassName="page-item"
-              nextClassName="page-item"
-              previousLinkClassName="page-link"
-              nextLinkClassName="page-link"
-              forcePage={this.state.currentPage}
-            />
+            <Table data={elements} />
+            {paginationElement}
           </div>
         </section>
       </main>
