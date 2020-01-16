@@ -9,7 +9,8 @@ export default class SearchForm extends Component {
   };
 
   handleChange = event => {
-    let filteredData = this.props.data.filter(item => {
+    const { data } = this.props;
+    const filteredData = data.filter(item => {
       return (
         item.mission_name
           .toLowerCase()

@@ -27,7 +27,7 @@ export default class App extends Component {
   };
 
   setElementsForCurrentPage() {
-    let elements = this.state.data.slice(
+    const elements = this.state.data.slice(
       this.state.offset,
       this.state.offset + this.state.perPage
     );
@@ -40,7 +40,7 @@ export default class App extends Component {
       params: { order: "desc" }
     });
     const data = response.data;
-    this.setState({ data });
+    this.setState({ data }, () => this.setElementsForCurrentPage());
   };
 
   sortAsc = async () => {
@@ -48,11 +48,11 @@ export default class App extends Component {
       params: { order: "asc" }
     });
     const data = response.data;
-    this.setState({ data });
+    this.setState({ data }, () => this.setElementsForCurrentPage());
   };
 
-  handlePageClick = data => {
-    const selectedPage = data.selected;
+  handlePageClick = elements => {
+    const selectedPage = elements.selected;
     const offset = selectedPage * this.state.perPage;
     this.setState({ currentPage: selectedPage, offset: offset }, () => {
       this.setElementsForCurrentPage();
@@ -60,36 +60,20 @@ export default class App extends Component {
   };
 
   updateElements = filteredData => {
-    this.setState({ elements: filteredData });
+    this.setState(
+      {
+        elements: filteredData,
+        pageCount: Math.ceil(filteredData.length / this.state.perPage)
+      },
+      () => {
+        this.setElementsForCurrentPage();
+      }
+    );
   };
 
   render() {
     const { elements } = this.state;
     const { data } = this.state;
-
-    let paginationElement;
-    if (this.state.pageCount > 1) {
-      paginationElement = (
-        <ReactPaginate
-          previousLabel={"prev"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={this.state.pageCount}
-          onPageChange={this.handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          nextClassName="page-item"
-          previousLinkClassName="page-link"
-          nextLinkClassName="page-link"
-          forcePage={this.state.currentPage}
-        />
-      );
-    }
-
     return (
       <main>
         <section className="rockets">
@@ -114,7 +98,25 @@ export default class App extends Component {
             </div>
 
             <Table data={elements} />
-            {paginationElement}
+            {this.state.pageCount > 1 ? (
+              <ReactPaginate
+                previousLabel={"prev"}
+                nextLabel={"next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={this.state.pageCount}
+                onPageChange={this.handlePageClick}
+                containerClassName={"pagination"}
+                activeClassName={"active"}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                nextClassName="page-item"
+                previousLinkClassName="page-link"
+                nextLinkClassName="page-link"
+                forcePage={this.state.currentPage}
+              />
+            ) : null}
           </div>
         </section>
       </main>
