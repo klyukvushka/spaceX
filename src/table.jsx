@@ -18,7 +18,7 @@ export default class Table extends Component {
       if (!parameter) return "failure";
       else return "success";
     }
-
+    const { data } = this.props;
     return (
       <table className="launch__table">
         <thead>
@@ -32,7 +32,7 @@ export default class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.data.map(item => (
+          {data.map(item => (
             <tr key={item.flight_number}>
               <td>{item.flight_number}.</td>
               <td>{item.mission_name}</td>

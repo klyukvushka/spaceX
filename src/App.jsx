@@ -3,11 +3,8 @@ import ReactPaginate from "react-paginate";
 import "./App.scss";
 import Table from "./Table";
 import SearchForm from "./Search";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "https://api.spacexdata.com/v3/launches"
-});
+import Rocket from "./Rocket";
+import { instance } from "./axios-instance";
 
 export default class App extends Component {
   state = {
@@ -18,16 +15,15 @@ export default class App extends Component {
     currentPage: 0
   };
 
-  componentDidMount = () => {
-    instance.get().then(response => {
-      this.setState(
-        {
-          data: response.data,
-          pageCount: Math.ceil(response.data.length / this.state.perPage)
-        },
-        () => this.setElementsForCurrentPage()
-      );
-    });
+  componentDidMount = async () => {
+    const response = await instance.get("/launches");
+    this.setState(
+      {
+        data: response.data,
+        pageCount: Math.ceil(response.data.length / this.state.perPage)
+      },
+      () => this.setElementsForCurrentPage()
+    );
   };
 
   setElementsForCurrentPage() {
@@ -39,18 +35,20 @@ export default class App extends Component {
     this.setState({ elements: elements });
   }
 
-  sortDesc = () => {
-    instance.get("?order=desc").then(response => {
-      const data = response.data;
-      this.setState({ data });
+  sortDesc = async () => {
+    const response = await instance.get("/launches", {
+      params: { order: "desc" }
     });
+    const data = response.data;
+    this.setState({ data });
   };
 
-  sortAsc = () => {
-    instance.get("?order=asc").then(response => {
-      const data = response.data;
-      this.setState({ data });
+  sortAsc = async () => {
+    const response = await instance.get("/launches", {
+      params: { order: "asc" }
     });
+    const data = response.data;
+    this.setState({ data });
   };
 
   handlePageClick = data => {
@@ -94,6 +92,12 @@ export default class App extends Component {
 
     return (
       <main>
+        <section className="rockets">
+          <div className="container">
+            <h2 className="rockets__title">SpaceX rockets</h2>
+            {/* <Rocket /> */}
+          </div>
+        </section>
         <section className="launch">
           <div className="container">
             <h1 className="launch__title">SpaceX launches</h1>
