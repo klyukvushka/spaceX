@@ -4,15 +4,17 @@ export default class SearchForm extends Component {
     elements: []
   };
 
-  onSubmit = e => {
-    e.preventDefault();
+  onSubmit = event => {
+    event.preventDefault();
   };
 
-  handleChange = e => {
-    let filteredData = this.props.data.filter(item => {
+  handleChange = event => {
+    const { data } = this.props;
+    const filteredData = data.filter(item => {
       return (
-        item.mission_name.toLowerCase().search(e.target.value.toLowerCase()) !==
-        -1
+        item.mission_name
+          .toLowerCase()
+          .search(event.target.value.toLowerCase()) !== -1
       );
     });
 

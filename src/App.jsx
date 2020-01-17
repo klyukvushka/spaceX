@@ -3,11 +3,8 @@ import ReactPaginate from "react-paginate";
 import "./App.scss";
 import Table from "./Table";
 import SearchForm from "./Search";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "https://api.spacexdata.com/v3/launches"
-});
+import Rocket from "./Rocket";
+import { instance } from "./axios-instance";
 
 export default class App extends Component {
   state = {
@@ -18,20 +15,19 @@ export default class App extends Component {
     currentPage: 0
   };
 
-  componentDidMount = () => {
-    instance.get().then(response => {
-      this.setState(
-        {
-          data: response.data,
-          pageCount: Math.ceil(response.data.length / this.state.perPage)
-        },
-        () => this.setElementsForCurrentPage()
-      );
-    });
+  componentDidMount = async () => {
+    const response = await instance.get("/launches");
+    this.setState(
+      {
+        data: response.data,
+        pageCount: Math.ceil(response.data.length / this.state.perPage)
+      },
+      () => this.setElementsForCurrentPage()
+    );
   };
 
   setElementsForCurrentPage() {
-    let elements = this.state.data.slice(
+    const elements = this.state.data.slice(
       this.state.offset,
       this.state.offset + this.state.perPage
     );
@@ -39,22 +35,24 @@ export default class App extends Component {
     this.setState({ elements: elements });
   }
 
-  sortDesc = () => {
-    instance.get("?order=desc").then(response => {
-      const data = response.data;
-      this.setState({ data });
+  sortDesc = async () => {
+    const response = await instance.get("/launches", {
+      params: { order: "desc" }
     });
+    const data = response.data;
+    this.setState({ data }, () => this.setElementsForCurrentPage());
   };
 
-  sortAsc = () => {
-    instance.get("?order=asc").then(response => {
-      const data = response.data;
-      this.setState({ data });
+  sortAsc = async () => {
+    const response = await instance.get("/launches", {
+      params: { order: "asc" }
     });
+    const data = response.data;
+    this.setState({ data }, () => this.setElementsForCurrentPage());
   };
 
-  handlePageClick = data => {
-    const selectedPage = data.selected;
+  handlePageClick = elements => {
+    const selectedPage = elements.selected;
     const offset = selectedPage * this.state.perPage;
     this.setState({ currentPage: selectedPage, offset: offset }, () => {
       this.setElementsForCurrentPage();
@@ -62,38 +60,28 @@ export default class App extends Component {
   };
 
   updateElements = filteredData => {
-    this.setState({ elements: filteredData });
+    this.setState(
+      {
+        elements: filteredData,
+        pageCount: Math.ceil(filteredData.length / this.state.perPage)
+      },
+      () => {
+        this.setElementsForCurrentPage();
+      }
+    );
   };
 
   render() {
     const { elements } = this.state;
     const { data } = this.state;
-
-    let paginationElement;
-    if (this.state.pageCount > 1) {
-      paginationElement = (
-        <ReactPaginate
-          previousLabel={"prev"}
-          nextLabel={"next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={this.state.pageCount}
-          onPageChange={this.handlePageClick}
-          containerClassName={"pagination"}
-          activeClassName={"active"}
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          nextClassName="page-item"
-          previousLinkClassName="page-link"
-          nextLinkClassName="page-link"
-          forcePage={this.state.currentPage}
-        />
-      );
-    }
-
     return (
       <main>
+        <section className="rockets">
+          <div className="container">
+            <h2 className="rockets__title">SpaceX rockets</h2>
+            {/* <Rocket /> */}
+          </div>
+        </section>
         <section className="launch">
           <div className="container">
             <h1 className="launch__title">SpaceX launches</h1>
@@ -110,7 +98,25 @@ export default class App extends Component {
             </div>
 
             <Table data={elements} />
-            {paginationElement}
+            {this.state.pageCount > 1 ? (
+              <ReactPaginate
+                previousLabel={"prev"}
+                nextLabel={"next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={this.state.pageCount}
+                onPageChange={this.handlePageClick}
+                containerClassName={"pagination"}
+                activeClassName={"active"}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                nextClassName="page-item"
+                previousLinkClassName="page-link"
+                nextLinkClassName="page-link"
+                forcePage={this.state.currentPage}
+              />
+            ) : null}
           </div>
         </section>
       </main>
