@@ -2,12 +2,13 @@
 import React, { Component } from "react";
 
 import { request } from "./request";
-
+import iconPlay from "./images/icons/play.svg";
 export default class Rocket extends Component {
   state = {
     id: null,
     name: "",
     description: "",
+    firstFlight: null,
     stages: null,
     height: null,
     mass: null,
@@ -18,14 +19,26 @@ export default class Rocket extends Component {
     this.getData();
   }
 
+  formatDate = date => {
+    let d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [day, month, year].join(".");
+  };
+
   getData = async () => {
     const rocketId = this.props.id;
     const response = await request.get(`/rockets/${rocketId}`);
-    console.log(response);
     this.setState({
       id: response.data.id,
       name: response.data.rocket_name,
       description: response.data.description,
+      firstFlight: response.data.first_flight,
       stages: response.data.stages,
       height: response.data.height.meters,
       mass: response.data.mass.kg,
@@ -38,26 +51,46 @@ export default class Rocket extends Component {
       id,
       name,
       description,
+      firstFlight,
       stages,
       height,
       mass,
       diameter
     } = this.state;
+
+    const imgSrc = this.props.imgSrc;
     return (
-      <div className="rockets__items">
-        <div className="card__wrapper" key={id}>
-          <div className="card__content">
-            <h3 className="card__name">{name}</h3>
-            <p className="card__description">{description}</p>
-            <p className="card__date">First flight - </p>
-            <h4 className="card__title">Technical characteristics: </h4>
-            <div className="card__properties">
-              <div className="card__property">Stages - {stages}</div>
-              <div className="card__property">Height - {height}m</div>
-              <div className="card__property">Mass - {mass}kg</div>
-              <div className="card__property">Diameter - {diameter}m</div>
+      <div className="item" key={id}>
+        <img src={imgSrc} alt="rocket" className="item__img" />
+        <div className="item__content">
+          <h3 className="item__name">{name}</h3>
+          <p className="item__description">{description}</p>
+          <p className="item__date">
+            First flight — {this.formatDate(firstFlight)}
+          </p>
+          <h4 className="item__title">Technical characteristics: </h4>
+          <div className="item__properties">
+            <div className="item__feature">
+              <div className="item__property">Stages</div> —
+              <div className="item__value">{stages}</div>
+            </div>
+            <div className="item__feature">
+              <div className="item__property">Height</div> —
+              <div className="item__value">{height} m</div>
+            </div>
+            <div className="item__feature">
+              <div className="item__property"> Mass</div> —
+              <div className="item__value">{mass} kg</div>
+            </div>
+            <div className="item__feature">
+              <div className="item__property">Diameter</div> —
+              <div className="item__value">{diameter} m</div>
             </div>
           </div>
+          <a href="http://" className="item__link">
+            <img src={iconPlay} alt="icon" className="icon icon-play" /> Watch
+            rocket launch
+          </a>
         </div>
       </div>
     );

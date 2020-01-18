@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 
 export default class Table extends Component {
+  formatDate = date => {
+    let d = new Date(date),
+      month = "" + (d.getMonth() + 1),
+      day = "" + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [day, month, year].join(".");
+  };
+
+  formatSuccess = parameter => {
+    if (!parameter) return "failure";
+    else return "success";
+  };
   render() {
-    function formatDate(date) {
-      var d = new Date(date),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
-
-      if (month.length < 2) month = "0" + month;
-      if (day.length < 2) day = "0" + day;
-
-      return [day, month, year].join(".");
-    }
-
-    function formatSuccess(parameter) {
-      if (!parameter) return "failure";
-      else return "success";
-    }
     const { data } = this.props;
     return (
       <table className="launch__table">
@@ -36,10 +36,10 @@ export default class Table extends Component {
             <tr key={item.flight_number}>
               <td>{item.flight_number}.</td>
               <td>{item.mission_name}</td>
-              <td>{formatDate(item.launch_date_utc)}</td>
+              <td>{this.formatDate(item.launch_date_utc)}</td>
               <td>{item.rocket.rocket_name}</td>
               <td>{item.rocket.rocket_type}</td>
-              <td>{formatSuccess(item.launch_success)}</td>
+              <td>{this.formatSuccess(item.launch_success)}</td>
             </tr>
           ))}
         </tbody>

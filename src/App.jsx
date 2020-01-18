@@ -5,6 +5,10 @@ import Table from "./Table";
 import SearchForm from "./Search";
 import Rocket from "./Rocket";
 import { request } from "./request";
+import falcon1 from "./images/falcon1.jpg";
+import falcon9 from "./images/falcon9.jpg";
+import falconH from "./images/falconH.jpg";
+import starship from "./images/starship.png";
 
 export default class App extends Component {
   state = {
@@ -78,13 +82,18 @@ export default class App extends Component {
       <main>
         <section className="rockets">
           <div className="container">
-            <h2 className="rockets__title">SpaceX rockets</h2>
-            <Rocket id="falcon1" />
+            <h2 className="section-title">SpaceX rockets</h2>
+            <div className="rockets__items">
+              <Rocket id="falcon1" imgSrc={falcon1} />
+              <Rocket id="falcon9" imgSrc={falcon9} />
+              <Rocket id="falconheavy" imgSrc={falconH} />
+              <Rocket id="starship" imgSrc={starship} />
+            </div>
           </div>
         </section>
         <section className="launch">
           <div className="container">
-            <h1 className="launch__title">SpaceX launches</h1>
+            <h1 className="section-title">SpaceX launches</h1>
             <div className="launch__top">
               <div className="launch__group">
                 <button onClick={this.sortDesc} className="btn">
