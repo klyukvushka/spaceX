@@ -4,7 +4,7 @@ import "./App.scss";
 import Table from "./Table";
 import SearchForm from "./Search";
 import Rocket from "./Rocket";
-import { instance } from "./axios-instance";
+import { request } from "./request";
 
 export default class App extends Component {
   state = {
@@ -16,7 +16,7 @@ export default class App extends Component {
   };
 
   componentDidMount = async () => {
-    const response = await instance.get("/launches");
+    const response = await request.get("/launches");
     this.setState(
       {
         data: response.data,
@@ -36,7 +36,7 @@ export default class App extends Component {
   }
 
   sortDesc = async () => {
-    const response = await instance.get("/launches", {
+    const response = await request.get("/launches", {
       params: { order: "desc" }
     });
     const data = response.data;
@@ -44,7 +44,7 @@ export default class App extends Component {
   };
 
   sortAsc = async () => {
-    const response = await instance.get("/launches", {
+    const response = await request.get("/launches", {
       params: { order: "asc" }
     });
     const data = response.data;
@@ -79,7 +79,7 @@ export default class App extends Component {
         <section className="rockets">
           <div className="container">
             <h2 className="rockets__title">SpaceX rockets</h2>
-            {/* <Rocket /> */}
+            <Rocket id="falcon1" />
           </div>
         </section>
         <section className="launch">
