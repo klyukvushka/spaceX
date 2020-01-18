@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import ReactPaginate from "react-paginate";
 import "./App.scss";
 import Table from "./Table";
@@ -84,10 +85,10 @@ export default class App extends Component {
           <div className="container">
             <h2 className="section-title">SpaceX rockets</h2>
             <div className="rockets__items">
-              <Rocket id="falcon1" imgSrc={falcon1} />
-              <Rocket id="falcon9" imgSrc={falcon9} />
-              <Rocket id="falconheavy" imgSrc={falconH} />
-              <Rocket id="starship" imgSrc={starship} />
+              <Rocket id="falcon1" imgSrc={falcon1} videoId="YMvQsmLv44o" />
+              <Rocket id="falcon9" imgSrc={falcon9} videoId="nxSxgBKlYws" />
+              <Rocket id="falconheavy" imgSrc={falconH} videoId="wbSwFU6tY1c" />
+              <Rocket id="starship" imgSrc={starship} videoId="C8JyvzU0CXU" />
             </div>
           </div>
         </section>

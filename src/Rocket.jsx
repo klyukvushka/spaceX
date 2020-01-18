@@ -1,6 +1,6 @@
 // @ts-check
 import React, { Component } from "react";
-
+import ModalVideo from "react-modal-video";
 import { request } from "./request";
 import iconPlay from "./images/icons/play.svg";
 export default class Rocket extends Component {
@@ -12,12 +12,16 @@ export default class Rocket extends Component {
     stages: null,
     height: null,
     mass: null,
-    diameter: null
+    diameter: null,
+    isOpen: false
   };
 
   componentDidMount() {
     this.getData();
   }
+  openModal = () => {
+    this.setState({ isOpen: true });
+  };
 
   formatDate = date => {
     let d = new Date(date),
@@ -59,6 +63,7 @@ export default class Rocket extends Component {
     } = this.state;
 
     const imgSrc = this.props.imgSrc;
+    const videoId = this.props.videoId;
     return (
       <div className="item" key={id}>
         <img src={imgSrc} alt="rocket" className="item__img" />
@@ -87,10 +92,16 @@ export default class Rocket extends Component {
               <div className="item__value">{diameter} m</div>
             </div>
           </div>
-          <a href="http://" className="item__link">
+          <ModalVideo
+            channel="youtube"
+            isOpen={this.state.isOpen}
+            videoId={videoId}
+            onClose={() => this.setState({ isOpen: false })}
+          />
+          <button className="item__button" onClick={this.openModal}>
             <img src={iconPlay} alt="icon" className="icon icon-play" /> Watch
             rocket launch
-          </a>
+          </button>
         </div>
       </div>
     );
