@@ -1,0 +1,48 @@
+.launch {
+  .section-title {
+    color: #8209e4;
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  &__table {
+    width: 100%;
+    position: relative;
+    thead {
+      border-bottom: 2px solid #f4f4f4;
+
+      tr {
+        background-color: #ffffff !important;
+      }
+    }
+    th {
+      padding: 10px 5px;
+      color: #00118b;
+      position: sticky;
+      top: 0;
+      height: 45px;
+      background-color: #ffffff;
+    }
+    td {
+      padding: 10px 5px;
+    }
+    tr:hover {
+      background-color: #d6e6f1;
+    }
+    tr:nth-child(odd) {
+      background-color: #f3f3f3;
+      &:hover {
+        background-color: #d6e6f1;
+      }
+    }
+  }
+  &__cell {
+    text-align: center;
+  }
+  .form {
+    flex-basis: 67%;
+  }
+}

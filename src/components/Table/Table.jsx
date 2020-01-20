@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Table.scss";
 
 export default class Table extends Component {
   formatDate = date => {

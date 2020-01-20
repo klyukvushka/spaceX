@@ -1,8 +1,9 @@
 // @ts-check
 import React, { Component } from "react";
 import ModalVideo from "react-modal-video";
-import { request } from "./request";
-import iconPlay from "./images/icons/play.svg";
+import { request } from "../../requests/request";
+import "./Rocket.scss";
+import iconPlay from "../../images/icons/play.svg";
 export default class Rocket extends Component {
   state = {
     id: null,

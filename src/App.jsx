@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 import ReactPaginate from "react-paginate";
 import "./App.scss";
-import Table from "./Table";
-import SearchForm from "./Search";
-import Rocket from "./Rocket";
-import { request } from "./request";
+import Table from "./components/Table/Table";
+import SearchForm from "./components/Search/Search";
+import Rocket from "./components/Rocket/Rocket";
+import { request } from "./requests/request";
 import falcon1 from "./images/falcon1.jpg";
 import falcon9 from "./images/falcon9.jpg";
 import falconH from "./images/falconH.jpg";

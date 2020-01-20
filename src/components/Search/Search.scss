@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-control {
+    height: 35px;
+    &:focus {
+      border-color: #ced4da;
+      box-shadow: none;
+    }
+  }
+}

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "./Search.scss";
+
 export default class SearchForm extends Component {
   state = {
     elements: []
