@@ -4,13 +4,14 @@
   }
   &__top {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 5px;
   }
   &__table {
     width: 100%;
     position: relative;
+    counter-reset: rowNumber;
     thead {
       border-bottom: 2px solid #f4f4f4;
 
@@ -25,6 +26,9 @@
       top: 0;
       height: 45px;
       background-color: #ffffff;
+    }
+    .th-click {
+      cursor: pointer;
     }
     td {
       padding: 10px 5px;
@@ -42,7 +46,33 @@
   &__cell {
     text-align: center;
   }
-  .form {
-    flex-basis: 67%;
+}
+
+table tbody tr {
+  counter-increment: rowNumber;
+}
+
+table tr td:first-child::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+}
+
+.icon {
+  position: relative;
+  &-desc::before {
+    position: absolute;
+    content: "\1F815";
+    width: 100%;
+    bottom: -9px;
+    left: 3px;
+    font-size: 19px;
+  }
+  &-asc::before {
+    position: absolute;
+    content: "\1F817";
+    width: 100%;
+    bottom: -9px;
+    left: 3px;
+    font-size: 19px;
   }
 }

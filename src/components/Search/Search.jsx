@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Search.scss";
 
 export default class SearchForm extends Component {
@@ -45,3 +46,7 @@ export default class SearchForm extends Component {
     );
   }
 }
+
+SearchForm.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired
+};

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 import ReactPaginate from "react-paginate";
 import "./App.scss";
@@ -17,11 +18,15 @@ export default class App extends Component {
     offset: 0,
     elements: [],
     perPage: 30,
-    currentPage: 0
+    currentPage: 0,
+    sort: "desc"
   };
 
   componentDidMount = async () => {
-    const response = await request.get("/launches");
+    const response = await request.get("/launches", {
+      params: { order: "desc" }
+    });
+
     this.setState(
       {
         data: response.data,
@@ -30,6 +35,13 @@ export default class App extends Component {
       () => this.setElementsForCurrentPage()
     );
   };
+
+  // не выводить будущие запуски
+  // actualData = () => {
+  //   if (response.data.launch_success === "false" && response.data.details === null) {
+
+  //   }
+  // }
 
   setElementsForCurrentPage() {
     const elements = this.state.data.slice(
@@ -45,7 +57,7 @@ export default class App extends Component {
       params: { order: "desc" }
     });
     const data = response.data;
-    this.setState({ data }, () => this.setElementsForCurrentPage());
+    this.setState({ data });
   };
 
   sortAsc = async () => {
@@ -53,32 +65,38 @@ export default class App extends Component {
       params: { order: "asc" }
     });
     const data = response.data;
-    this.setState({ data }, () => this.setElementsForCurrentPage());
+    this.setState({ data });
   };
 
-  handlePageClick = elements => {
-    const selectedPage = elements.selected;
-    const offset = selectedPage * this.state.perPage;
-    this.setState({ currentPage: selectedPage, offset: offset }, () => {
-      this.setElementsForCurrentPage();
-    });
+  handleSorting = () => {
+    const sort = this.state.sort === "asc" ? "desc" : "asc";
+    this.setState({ sort });
+    sort === "asc" ? this.sortAsc() : this.sortDesc();
   };
 
-  updateElements = filteredData => {
-    this.setState(
-      {
-        elements: filteredData,
-        pageCount: Math.ceil(filteredData.length / this.state.perPage)
-      },
-      () => {
-        this.setElementsForCurrentPage();
-      }
-    );
-  };
+  // handlePageClick = elements => {
+  //   const selectedPage = elements.selected;
+  //   const offset = selectedPage * this.state.perPage;
+  //   this.setState({ currentPage: selectedPage, offset: offset }, () => {
+  //     this.setElementsForCurrentPage();
+  //   });
+  // };
+
+  // updateElements = filteredData => {
+  //   this.setState(
+  //     {
+  //       elements: filteredData,
+  //       pageCount: Math.ceil(filteredData.length / this.state.perPage)
+  //     },
+  //     () => {
+  //       this.setElementsForCurrentPage();
+  //     }
+  //   );
+  // };
 
   render() {
-    const { elements } = this.state;
     const { data } = this.state;
+    const { sort } = this.state;
     return (
       <main>
         <section className="rockets">
@@ -96,19 +114,11 @@ export default class App extends Component {
           <div className="container">
             <h1 className="section-title">SpaceX launches</h1>
             <div className="launch__top">
-              <div className="launch__group">
-                <button onClick={this.sortDesc} className="btn">
-                  Sort ↓
-                </button>
-                <button onClick={this.sortAsc} className="btn btn-asc">
-                  Sort ↑
-                </button>
-              </div>
               <SearchForm data={data} updateElements={this.updateElements} />
             </div>
 
-            <Table data={elements} />
-            {this.state.pageCount > 1 ? (
+            <Table data={data} handleSorting={this.handleSorting} sort={sort} />
+            {/* {this.state.pageCount > 1 ? (
               <ReactPaginate
                 previousLabel={"prev"}
                 nextLabel={"next"}
@@ -126,7 +136,7 @@ export default class App extends Component {
                 nextLinkClassName="page-link"
                 forcePage={this.state.currentPage}
               />
-            ) : null}
+            ) : null} */}
           </div>
         </section>
       </main>

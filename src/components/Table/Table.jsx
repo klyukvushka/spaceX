@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Table.scss";
 
 export default class Table extends Component {
@@ -18,24 +19,32 @@ export default class Table extends Component {
     if (!parameter) return "failure";
     else return "success";
   };
+
   render() {
     const { data } = this.props;
     return (
       <table className="launch__table">
         <thead>
           <tr>
-            <th>Flight №</th>
+            <th> №</th>
             <th>Mission Name</th>
-            <th>Date</th>
+            <th className="th-click" onClick={this.props.handleSorting}>
+              Date
+              <span
+                className={
+                  "icon icon-" + (this.props.sort === "asc" ? "desc" : "asc")
+                }
+              ></span>
+            </th>
             <th>Rocket Name</th>
             <th>Rocket Type</th>
-            <th>Success</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           {data.map(item => (
             <tr key={item.flight_number}>
-              <td>{item.flight_number}.</td>
+              <td>.</td>
               <td>{item.mission_name}</td>
               <td>{this.formatDate(item.launch_date_utc)}</td>
               <td>{item.rocket.rocket_name}</td>
@@ -48,3 +57,7 @@ export default class Table extends Component {
     );
   }
 }
+
+Table.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired
+};

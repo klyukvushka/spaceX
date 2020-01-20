@@ -1,6 +1,7 @@
 // @ts-check
 import React, { Component } from "react";
 import ModalVideo from "react-modal-video";
+import PropTypes from "prop-types";
 import { request } from "../../requests/request";
 import "./Rocket.scss";
 import iconPlay from "../../images/icons/play.svg";
@@ -108,3 +109,9 @@ export default class Rocket extends Component {
     );
   }
 }
+
+Rocket.propTypes = {
+  id: PropTypes.string.isRequired,
+  videoId: PropTypes.string,
+  imgSrc: PropTypes.string
+};
