@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 import "./App.scss";
 import Table from "./components/Table/Table";
 import SearchForm from "./components/Search/Search";
@@ -27,21 +27,18 @@ export default class App extends Component {
       params: { order: "desc" }
     });
 
+    const data = response.data.filter(item => {
+      return item.launch_success !== null && item.details !== null;
+    });
+
     this.setState(
       {
-        data: response.data,
+        data: data,
         pageCount: Math.ceil(response.data.length / this.state.perPage)
       },
       () => this.setElementsForCurrentPage()
     );
   };
-
-  // не выводить будущие запуски
-  // actualData = () => {
-  //   if (response.data.launch_success === "false" && response.data.details === null) {
-
-  //   }
-  // }
 
   setElementsForCurrentPage() {
     const elements = this.state.data.slice(
@@ -56,7 +53,9 @@ export default class App extends Component {
     const response = await request.get("/launches", {
       params: { order: "desc" }
     });
-    const data = response.data;
+    const data = response.data.filter(item => {
+      return item.launch_success !== null && item.details !== null;
+    });
     this.setState({ data });
   };
 
@@ -64,7 +63,9 @@ export default class App extends Component {
     const response = await request.get("/launches", {
       params: { order: "asc" }
     });
-    const data = response.data;
+    const data = response.data.filter(item => {
+      return item.launch_success !== null && item.details !== null;
+    });
     this.setState({ data });
   };
 
