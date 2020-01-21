@@ -6,6 +6,8 @@ import "./App.scss";
 import Table from "./components/Table/Table";
 import SearchForm from "./components/Search/Search";
 import Rocket from "./components/Rocket/Rocket";
+import { Loader } from "./components/Loader/Loader";
+
 import { request } from "./requests/request";
 import falcon1 from "./images/falcon1.jpg";
 import falcon9 from "./images/falcon9.jpg";
@@ -19,7 +21,8 @@ export default class App extends Component {
     elements: [],
     perPage: 30,
     currentPage: 0,
-    sort: "desc"
+    sort: "desc",
+    loading: true
   };
 
   componentDidMount = async () => {
@@ -33,6 +36,7 @@ export default class App extends Component {
 
     this.setState(
       {
+        loading: false,
         data: data,
         pageCount: Math.ceil(response.data.length / this.state.perPage)
       },
@@ -56,7 +60,7 @@ export default class App extends Component {
     const data = response.data.filter(item => {
       return item.launch_success !== null && item.details !== null;
     });
-    this.setState({ data });
+    this.setState({ loading: false, data: data });
   };
 
   sortAsc = async () => {
@@ -66,7 +70,7 @@ export default class App extends Component {
     const data = response.data.filter(item => {
       return item.launch_success !== null && item.details !== null;
     });
-    this.setState({ data });
+    this.setState({ loading: false, data: data });
   };
 
   handleSorting = () => {
@@ -96,18 +100,31 @@ export default class App extends Component {
   // };
 
   render() {
-    const { data } = this.state;
-    const { sort } = this.state;
+    const { data, sort, loading } = this.state;
     return (
       <main>
         <section className="rockets">
           <div className="container">
             <h2 className="section-title">SpaceX rockets</h2>
             <div className="rockets__items">
-              <Rocket id="falcon1" imgSrc={falcon1} videoId="YMvQsmLv44o" />
-              <Rocket id="falcon9" imgSrc={falcon9} videoId="nxSxgBKlYws" />
-              <Rocket id="falconheavy" imgSrc={falconH} videoId="wbSwFU6tY1c" />
-              <Rocket id="starship" imgSrc={starship} videoId="C8JyvzU0CXU" />
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <Rocket id="falcon1" imgSrc={falcon1} videoId="YMvQsmLv44o" />
+                  <Rocket id="falcon9" imgSrc={falcon9} videoId="nxSxgBKlYws" />
+                  <Rocket
+                    id="falconheavy"
+                    imgSrc={falconH}
+                    videoId="wbSwFU6tY1c"
+                  />
+                  <Rocket
+                    id="starship"
+                    imgSrc={starship}
+                    videoId="C8JyvzU0CXU"
+                  />
+                </>
+              )}
             </div>
           </div>
         </section>
@@ -117,8 +134,15 @@ export default class App extends Component {
             <div className="launch__top">
               <SearchForm data={data} updateElements={this.updateElements} />
             </div>
-
-            <Table data={data} handleSorting={this.handleSorting} sort={sort} />
+            {loading ? (
+              <Loader />
+            ) : (
+              <Table
+                data={data}
+                handleSorting={this.handleSorting}
+                sort={sort}
+              />
+            )}
             {/* {this.state.pageCount > 1 ? (
               <ReactPaginate
                 previousLabel={"prev"}

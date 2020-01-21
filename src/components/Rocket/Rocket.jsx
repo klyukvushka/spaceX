@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import ModalVideo from "react-modal-video";
 import PropTypes from "prop-types";
+import { Loader } from "../../components/Loader/Loader";
 import { request } from "../../requests/request";
 import "./Rocket.scss";
 import iconPlay from "../../images/icons/play.svg";
