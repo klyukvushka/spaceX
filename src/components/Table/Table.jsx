@@ -44,7 +44,7 @@ export default class Table extends Component {
         <tbody>
           {data.map(item => (
             <tr key={item.flight_number}>
-              <td>.</td>
+              <td>{item.flight_number}.</td>
               <td>{item.mission_name}</td>
               <td>{this.formatDate(item.launch_date_utc)}</td>
               <td>{item.rocket.rocket_name}</td>

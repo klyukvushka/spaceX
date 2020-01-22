@@ -3,17 +3,13 @@ import PropTypes from "prop-types";
 import "./Search.scss";
 
 export default class SearchForm extends Component {
-  state = {
-    elements: []
-  };
-
   onSubmit = event => {
     event.preventDefault();
   };
 
   handleChange = event => {
-    const { data } = this.props;
-    const filteredData = data.filter(item => {
+    const { primaryData } = this.props;
+    const filteredData = primaryData.filter(item => {
       return (
         item.mission_name
           .toLowerCase()
@@ -21,7 +17,7 @@ export default class SearchForm extends Component {
       );
     });
 
-    this.setState({ elements: filteredData });
+    this.setState({ data: filteredData });
   };
 
   render() {
@@ -37,7 +33,7 @@ export default class SearchForm extends Component {
           type="submit"
           className="btn btn-success"
           onClick={() => {
-            this.props.updateElements(this.state.elements);
+            this.props.updateElements(this.state.data);
           }}
         >
           Search

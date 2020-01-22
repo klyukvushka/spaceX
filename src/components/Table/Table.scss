@@ -48,14 +48,14 @@
   }
 }
 
-table tbody tr {
-  counter-increment: rowNumber;
-}
+// table tbody tr {
+//   counter-increment: rowNumber;
+// }
 
-table tr td:first-child::before {
-  content: counter(rowNumber);
-  min-width: 1em;
-}
+// table tr td:first-child::before {
+//   content: counter(rowNumber);
+//   min-width: 1em;
+// }
 
 .icon {
   position: relative;
