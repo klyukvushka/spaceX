@@ -44,5 +44,5 @@ export default class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired
+  primaryData: PropTypes.arrayOf(PropTypes.object).isRequired
 };

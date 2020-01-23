@@ -18,9 +18,10 @@ export default class Rocket extends Component {
     isOpen: false
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.getData();
-  }
+  };
+
   openModal = () => {
     this.setState({ isOpen: true });
   };

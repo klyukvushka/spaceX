@@ -59,5 +59,7 @@ export default class Table extends Component {
 }
 
 Table.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sort: PropTypes.string,
+  handleSorting: PropTypes.func
 };

@@ -23,66 +23,105 @@ export default class App extends Component {
     currentPage: 0,
     sort: "desc",
     loading: true,
-    initialPage: 0
+    initialPage: 0,
+    errorMessage: ""
   };
 
-  componentDidMount = async () => {
-    const response = await request.get("/launches", {
-      params: { order: "desc" }
-    });
+  componentDidMount = () => {
+    this.getLaunchesData();
+  };
 
-    const primaryData = response.data;
+  getLaunchesData = async () => {
+    try {
+      const response = await request.get("/launches", {
+        params: { order: "desc" }
+      });
+
+      const primaryData = response.data;
+
+      const data = response.data.slice(
+        this.state.offset,
+        this.state.offset + this.state.perPage
+      );
+
+      this.setState({
+        primaryData: primaryData,
+        loading: false,
+        data: data,
+        pageCount: Math.ceil(response.data.length / this.state.perPage)
+      });
+    } catch (error) {
+      if (error.response.status === 500) {
+        this.setState({
+          errorMessage: error.message
+        });
+      }
+    }
 
     // const filteredData = response.data.filter(item => {
     //   return item.launch_success !== null && item.details !== null;
     // });
-
-    const data = response.data.slice(
-      this.state.offset,
-      this.state.offset + this.state.perPage
-    );
-
-    this.setState({
-      primaryData: primaryData,
-      loading: false,
-      data: data,
-      pageCount: Math.ceil(response.data.length / this.state.perPage)
-    });
   };
 
-  setElementsForCurrentPage = async () => {
-    const response = await request.get("/launches", {
-      params: {
-        order: this.state.sort,
-        offset: this.state.offset
-      }
-    });
-
-    const data = response.data.slice(0, this.state.perPage);
-
-    this.setState({ data: data });
-  };
-
+  // sorting
   sortDesc = async () => {
-    const response = await request.get("/launches", {
-      params: { order: "desc" }
-    });
-    const data = response.data.slice(0, this.state.perPage);
-    this.setState({ loading: false, data: data });
+    try {
+      const response = await request.get("/launches", {
+        params: { order: "desc" }
+      });
+      const data = response.data.slice(0, this.state.perPage);
+      this.setState({ loading: false, data: data });
+    } catch (error) {
+      if (error.response.status === 500) {
+        this.setState({
+          errorMessage: error.message
+        });
+      }
+    }
   };
 
   sortAsc = async () => {
-    const response = await request.get("/launches", {
-      params: { order: "asc" }
-    });
-    const data = response.data.slice(0, this.state.perPage);
-    this.setState({ loading: false, data: data });
+    try {
+      const response = await request.get("/launches", {
+        params: { order: "asc" }
+      });
+      const data = response.data.slice(0, this.state.perPage);
+      this.setState({ loading: false, data: data });
+    } catch (error) {
+      if (error.response.status === 500) {
+        this.setState({
+          errorMessage: error.message
+        });
+      }
+    }
   };
 
   handleSorting = () => {
     const sort = this.state.sort === "asc" ? "desc" : "asc";
     this.setState({ sort: sort, currentPage: 0 });
     sort === "asc" ? this.sortAsc() : this.sortDesc();
+  };
+
+  // pagination
+  setElementsForCurrentPage = async () => {
+    try {
+      const response = await request.get("/launches", {
+        params: {
+          order: this.state.sort,
+          offset: this.state.offset
+        }
+      });
+
+      const data = response.data.slice(0, this.state.perPage);
+
+      this.setState({ data: data });
+    } catch (error) {
+      if (error.response.status === 500) {
+        this.setState({
+          errorMessage: error.message
+        });
+      }
+    }
   };
 
   handlePageClick = data => {
@@ -93,6 +132,7 @@ export default class App extends Component {
     });
   };
 
+  // searching callback
   updateElements = filteredData => {
     const data = filteredData.slice(0, this.state.perPage);
     this.setState({
@@ -109,6 +149,13 @@ export default class App extends Component {
           <div className="container">
             <h2 className="section-title">SpaceX rockets</h2>
             <div className="rockets__items">
+              {this.state.errorMessage && (
+                <div className="error">
+                  <b>500 internal server error</b> <br />
+                  We are working towards creating something better. We won't be
+                  long:)
+                </div>
+              )}
               {loading ? (
                 <Loader />
               ) : (
@@ -139,6 +186,9 @@ export default class App extends Component {
                 updateElements={this.updateElements}
               />
             </div>
+            {this.state.errorMessage && (
+              <h3 className="error"> {this.state.errorMessage} </h3>
+            )}
             {loading ? (
               <Loader />
             ) : (
