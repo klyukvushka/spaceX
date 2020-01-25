@@ -5,7 +5,9 @@ import icon from "../../images/icons/restart.svg";
 
 export default class SearchForm extends Component {
   state = {
-    data: []
+    data: [],
+    value: "",
+    message: ""
   };
 
   onSubmit = event => {
@@ -14,20 +16,14 @@ export default class SearchForm extends Component {
 
   handleChange = event => {
     const { primaryData } = this.props;
+
+    const value = event.target.value;
+
     const filteredData = primaryData.filter(item => {
-      return (
-        item.mission_name
-          .toLowerCase()
-          .search(event.target.value.toLowerCase()) !== -1
-      );
+      return item.mission_name.toLowerCase().search(value.toLowerCase()) !== -1;
     });
 
     this.setState({ data: filteredData });
-  };
-
-  handleReset = () => {
-    const { primaryData } = this.props;
-    this.setState({ data: primaryData });
   };
 
   render() {
@@ -52,7 +48,9 @@ export default class SearchForm extends Component {
         <button
           type="reset"
           className="btn btn-reset"
-          onClick={this.handleReset}
+          onClick={() => {
+            this.props.updateElements(this.props.primaryData);
+          }}
         >
           <img
             src={icon}
@@ -62,6 +60,7 @@ export default class SearchForm extends Component {
             }}
           />
         </button>
+        <div className="form-message">{this.state.message}</div>
       </form>
     );
   }
