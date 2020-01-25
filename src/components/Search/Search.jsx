@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./Search.scss";
+import icon from "../../images/icons/restart.svg";
 
 export default class SearchForm extends Component {
+  state = {
+    data: []
+  };
+
   onSubmit = event => {
     event.preventDefault();
   };
@@ -18,6 +23,11 @@ export default class SearchForm extends Component {
     });
 
     this.setState({ data: filteredData });
+  };
+
+  handleReset = () => {
+    const { primaryData } = this.props;
+    this.setState({ data: primaryData });
   };
 
   render() {
@@ -37,6 +47,20 @@ export default class SearchForm extends Component {
           }}
         >
           Search
+        </button>
+
+        <button
+          type="reset"
+          className="btn btn-reset"
+          onClick={this.handleReset}
+        >
+          <img
+            src={icon}
+            alt="reset-icon"
+            onClick={() => {
+              this.props.updateElements(this.state.data);
+            }}
+          />
         </button>
       </form>
     );

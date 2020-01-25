@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .form {
   display: flex;
   justify-content: space-between;
@@ -8,6 +10,46 @@
     &:focus {
       border-color: #ced4da;
       box-shadow: none;
+    }
+  }
+}
+
+.btn {
+  outline: none;
+  border: 0;
+  border-radius: 5px;
+  display: inline-block;
+  color: #ffffff;
+  width: 85px;
+  height: 35px;
+  box-shadow: none !important;
+  &:focus {
+    border-color: transparent;
+  }
+  &-success {
+    background-color: $color2;
+    margin-left: 10px;
+    border-color: transparent;
+    &:hover {
+      background-color: darken($color2, 10%);
+    }
+    &:not(:disabled):not(.disabled):active {
+      background-color: lighten($color2, 10%);
+    }
+    &:focus {
+      background-color: $color2;
+    }
+  }
+  &-reset {
+    padding: 0;
+    width: 50px;
+    margin-left: 7px;
+    transition: opacity 0.2s ease-in;
+    img {
+      width: 30px;
+    }
+    &:hover {
+      opacity: 0.75;
     }
   }
 }
