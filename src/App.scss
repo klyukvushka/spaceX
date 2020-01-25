@@ -1,4 +1,5 @@
 @import "node_modules/react-modal-video/scss/modal-video.scss";
+@import "./styles/typography";
 
 .loader {
   width: 100%;
@@ -6,14 +7,6 @@
   img {
     width: 140px;
   }
-}
-
-.section-title {
-  text-align: center;
-  margin: 25px 0;
-  color: #000000;
-  font-size: 30px;
-  font-weight: 700;
 }
 
 .icon {
@@ -30,39 +23,21 @@
   border-radius: 5px;
   display: inline-block;
   color: #ffffff;
-  background-color: #00118b;
   width: 85px;
   height: 35px;
   box-shadow: none !important;
   &:focus {
     border-color: transparent;
   }
-  &:hover {
-    color: #ffffff;
-    background-color: darken(#00118b, 10%);
-  }
-  &:active {
-    background-color: lighten(#00118b, 10%);
-  }
-  &-asc {
-    margin-left: 10px;
-    background-color: #e70def;
-    &:hover {
-      background-color: darken(#e70def, 10%);
-    }
-    &:active {
-      background-color: lighten(#e70def, 10%);
-    }
-  }
   &-success {
-    background-color: #28a745;
+    background-color: $color2;
     margin-left: 10px;
     border-color: transparent;
     &:hover {
-      background-color: darken(#28a745, 10%);
+      background-color: darken($color2, 10%);
     }
     &:not(:disabled):not(.disabled):active {
-      background-color: lighten(#28a745, 10%);
+      background-color: lighten($color2, 10%);
     }
   }
 }
@@ -80,4 +55,9 @@
 .pagination {
   margin: 20px 0;
   justify-content: center;
+}
+
+.page-item.active .page-link {
+  background-color: #42a7fe;
+  border-color: #42a7fe;
 }

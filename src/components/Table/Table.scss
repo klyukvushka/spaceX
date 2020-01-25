@@ -1,7 +1,5 @@
+@import "../../styles/variables";
 .launch {
-  .section-title {
-    color: #8209e4;
-  }
   &__top {
     display: flex;
     justify-content: center;
@@ -21,7 +19,7 @@
     }
     th {
       padding: 10px 5px;
-      color: #00118b;
+      color: $color1;
       position: sticky;
       top: 0;
       height: 45px;
