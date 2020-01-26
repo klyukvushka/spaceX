@@ -2,7 +2,7 @@
 
 .form {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   flex-basis: 50%;
   &-control {
@@ -11,6 +11,13 @@
       border-color: #ced4da;
       box-shadow: none;
     }
+  }
+  &-group {
+    display: flex;
+    width: 100%;
+  }
+  &-message {
+    color: red;
   }
 }
 

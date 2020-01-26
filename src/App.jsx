@@ -6,6 +6,7 @@ import "./App.scss";
 import Table from "./components/Table/Table";
 import SearchForm from "./components/Search/Search";
 import Rocket from "./components/Rocket/Rocket";
+import Dragon from "./components/Dragon/Dragon";
 import { Loader } from "./components/Loader/Loader";
 
 import { request } from "./requests/request";
@@ -13,6 +14,8 @@ import falcon1 from "./images/falcon1.jpg";
 import falcon9 from "./images/falcon9.jpg";
 import falconH from "./images/falconH.jpg";
 import starship from "./images/starship.png";
+import dragon1 from "./images/dragon1.jpg";
+import dragon2 from "./images/dragon2.jpg";
 
 export default class App extends Component {
   state = {
@@ -145,10 +148,19 @@ export default class App extends Component {
     const { data, sort, loading, primaryData } = this.state;
     return (
       <main>
+        <section className="dragons">
+          <div className="container">
+            <h2 className="section-title">SpaceX dragons</h2>
+            <div className="items">
+              <Dragon id="dragon1" imgSrc={dragon1} videoId="kbivNwbD9to" />
+              <Dragon id="dragon2" imgSrc={dragon2} videoId="2ZL0tbOZYhE" />
+            </div>
+          </div>
+        </section>
         <section className="rockets">
           <div className="container">
             <h2 className="section-title">SpaceX rockets</h2>
-            <div className="rockets__items">
+            <div className="items">
               {this.state.errorMessage && (
                 <div className="error">
                   <b>500 internal server error</b> <br />

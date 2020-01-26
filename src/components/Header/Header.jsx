@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { request } from "../../requests/request";
+
 import "./Header.scss";
 
 export default class Header extends Component {

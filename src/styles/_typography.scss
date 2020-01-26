@@ -2,13 +2,13 @@
 
 .section-title {
   text-align: center;
-  margin: 35px 0;
+  margin: 50px 0 35px;
   color: $color1;
   font-size: 40px;
   font-weight: 700;
   &_header {
     text-align: left;
     font-size: 58px;
-    margin-bottom: 30px;
+    margin: 35px 0;
   }
 }
