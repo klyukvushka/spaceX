@@ -25,7 +25,8 @@ export default class App extends Component {
     perPage: 20,
     currentPage: 0,
     sort: "desc",
-    loading: true,
+    loadingRockets: true,
+    loadingLaunches: true,
     initialPage: 0,
     errorMessage: ""
   };
@@ -49,7 +50,8 @@ export default class App extends Component {
 
       this.setState({
         primaryData: primaryData,
-        loading: false,
+        loadingRockets: false,
+        loadingLaunches: false,
         data: data,
         pageCount: Math.ceil(response.data.length / this.state.perPage)
       });
@@ -73,7 +75,7 @@ export default class App extends Component {
         params: { order: "desc" }
       });
       const data = response.data.slice(0, this.state.perPage);
-      this.setState({ loading: false, data: data });
+      this.setState({ loadingLaunches: false, data: data });
     } catch (error) {
       if (error.response.status === 500) {
         this.setState({
@@ -89,7 +91,7 @@ export default class App extends Component {
         params: { order: "asc" }
       });
       const data = response.data.slice(0, this.state.perPage);
-      this.setState({ loading: false, data: data });
+      this.setState({ loadingLaunches: false, data: data });
     } catch (error) {
       if (error.response.status === 500) {
         this.setState({
@@ -101,7 +103,7 @@ export default class App extends Component {
 
   handleSorting = () => {
     const sort = this.state.sort === "asc" ? "desc" : "asc";
-    this.setState({ sort: sort, currentPage: 0 });
+    this.setState({ sort: sort, currentPage: 0, loadingLaunches: true });
     sort === "asc" ? this.sortAsc() : this.sortDesc();
   };
 
@@ -145,7 +147,13 @@ export default class App extends Component {
   };
 
   render() {
-    const { data, sort, loading, primaryData } = this.state;
+    const {
+      data,
+      sort,
+      loadingLaunches,
+      loadingRockets,
+      primaryData
+    } = this.state;
     return (
       <main>
         <section className="dragons">
@@ -168,7 +176,7 @@ export default class App extends Component {
                   long:)
                 </div>
               )}
-              {loading ? (
+              {loadingRockets ? (
                 <Loader />
               ) : (
                 <>
@@ -199,36 +207,39 @@ export default class App extends Component {
               />
             </div>
             {this.state.errorMessage && (
-              <h3 className="error"> {this.state.errorMessage} </h3>
+              <div className="error">
+                <b>500 internal server error</b> <br />
+                We are working towards creating something better. We won't be
+                long:)
+              </div>
             )}
-            {loading ? (
+
+            <Table
+              data={data}
+              handleSorting={this.handleSorting}
+              sort={sort}
+              loadingLaunches={loadingLaunches}
+            />
+            {loadingLaunches ? (
               <Loader />
             ) : (
-              <>
-                <Table
-                  data={data}
-                  handleSorting={this.handleSorting}
-                  sort={sort}
-                />
-
-                <ReactPaginate
-                  previousLabel={"prev"}
-                  nextLabel={"next"}
-                  breakLabel={"..."}
-                  breakClassName={"break-me"}
-                  pageCount={this.state.pageCount}
-                  onPageChange={this.handlePageClick}
-                  containerClassName={"pagination"}
-                  activeClassName={"active"}
-                  pageClassName="page-item"
-                  pageLinkClassName="page-link"
-                  previousClassName="page-item"
-                  nextClassName="page-item"
-                  previousLinkClassName="page-link"
-                  nextLinkClassName="page-link"
-                  forcePage={this.state.currentPage}
-                />
-              </>
+              <ReactPaginate
+                previousLabel={"prev"}
+                nextLabel={"next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={this.state.pageCount}
+                onPageChange={this.handlePageClick}
+                containerClassName={"pagination"}
+                activeClassName={"active"}
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                nextClassName="page-item"
+                previousLinkClassName="page-link"
+                nextLinkClassName="page-link"
+                forcePage={this.state.currentPage}
+              />
             )}
           </div>
         </section>

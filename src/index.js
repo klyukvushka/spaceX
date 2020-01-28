@@ -8,7 +8,11 @@ import App from "./App";
 
 ReactDOM.render(
   <>
-    <Header /> <App /> <Footer />
+    <article className="content">
+      <Header /> <App />
+    </article>
+
+    <Footer />
   </>,
   document.getElementById("root")
 );

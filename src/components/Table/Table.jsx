@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Loader } from "../Loader/Loader";
 import "./Table.scss";
 
 export default class Table extends Component {
@@ -21,7 +22,7 @@ export default class Table extends Component {
   };
 
   render() {
-    const { data } = this.props;
+    const { data, loadingLaunches } = this.props;
     return (
       <table className="launch__table">
         <thead>
@@ -42,16 +43,26 @@ export default class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {data.map(item => (
-            <tr key={item.flight_number}>
-              <td>{item.flight_number}.</td>
-              <td>{item.mission_name}</td>
-              <td>{this.formatDate(item.launch_date_utc)}</td>
-              <td>{item.rocket.rocket_name}</td>
-              <td>{item.rocket.rocket_type}</td>
-              <td>{this.formatSuccess(item.launch_success)}</td>
+          {loadingLaunches ? (
+            <tr className="loader-tr">
+              <td>
+                <Loader />
+              </td>
             </tr>
-          ))}
+          ) : (
+            <>
+              {data.map(item => (
+                <tr key={item.flight_number}>
+                  <td>{item.flight_number}.</td>
+                  <td>{item.mission_name}</td>
+                  <td>{this.formatDate(item.launch_date_utc)}</td>
+                  <td>{item.rocket.rocket_name}</td>
+                  <td>{item.rocket.rocket_type}</td>
+                  <td>{this.formatSuccess(item.launch_success)}</td>
+                </tr>
+              ))}
+            </>
+          )}
         </tbody>
       </table>
     );
@@ -61,5 +72,6 @@ export default class Table extends Component {
 Table.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   sort: PropTypes.string,
-  handleSorting: PropTypes.func
+  handleSorting: PropTypes.func,
+  loading: PropTypes.bool
 };
