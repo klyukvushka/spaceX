@@ -1,0 +1,20 @@
+@import "../../styles/variables";
+
+.footer {
+  margin-top: 100px;
+  background-color: #f9f9f9;
+  padding: 25px 0;
+  &__text {
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+  }
+  &__link {
+    color: $color1;
+    transition: color 0.2s ease-in;
+    &:hover {
+      text-decoration: none;
+      color: $color2;
+    }
+  }
+}
