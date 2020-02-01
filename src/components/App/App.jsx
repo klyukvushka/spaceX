@@ -3,19 +3,20 @@ import React, { Component } from "react";
 
 import ReactPaginate from "react-paginate";
 import "./App.scss";
-import Table from "./components/Table/Table";
-import SearchForm from "./components/Search/Search";
-import Rocket from "./components/Rocket/Rocket";
-import Dragon from "./components/Dragon/Dragon";
-import { Loader } from "./components/Loader/Loader";
+import Table from "../Table/Table";
+import SearchForm from "../Search/Search";
+import Select from "../Select/Select";
+import Rocket from "../Rocket/Rocket";
+import Dragon from "../Dragon/Dragon";
+import { Loader } from "../Loader/Loader";
 
-import { request } from "./requests/request";
-import falcon1 from "./images/falcon1.jpg";
-import falcon9 from "./images/falcon9.jpg";
-import falconH from "./images/falconH.jpg";
-import starship from "./images/starship.png";
-import dragon1 from "./images/dragon1.jpg";
-import dragon2 from "./images/dragon2.jpg";
+import { request } from "../../requests/request";
+import falcon1 from "../../images/falcon1.jpg";
+import falcon9 from "../../images/falcon9.jpg";
+import falconH from "../../images/falconH.jpg";
+import starship from "../../images/starship.png";
+import dragon1 from "../../images/dragon1.jpg";
+import dragon2 from "../../images/dragon2.jpg";
 
 export default class App extends Component {
   state = {
@@ -27,7 +28,6 @@ export default class App extends Component {
     sort: "desc",
     loadingRockets: true,
     loadingLaunches: true,
-    initialPage: 0,
     errorMessage: ""
   };
 
@@ -107,6 +107,34 @@ export default class App extends Component {
     sort === "asc" ? this.sortAsc() : this.sortDesc();
   };
 
+  // renew table when display value changes
+  handleValue = async value => {
+    this.setState({
+      perPage: value,
+      currentPage: 0,
+      loadingLaunches: true
+    });
+    try {
+      const response = await request.get("/launches", {
+        params: { order: "desc" }
+      });
+
+      const data = response.data.slice(0, this.state.perPage);
+
+      this.setState({
+        loadingLaunches: false,
+        data: data,
+        pageCount: Math.ceil(response.data.length / this.state.perPage)
+      });
+    } catch (error) {
+      if (error.response.status === 500) {
+        this.setState({
+          errorMessage: error.message
+        });
+      }
+    }
+  };
+
   // pagination
   setElementsForCurrentPage = async () => {
     try {
@@ -119,7 +147,7 @@ export default class App extends Component {
 
       const data = response.data.slice(0, this.state.perPage);
 
-      this.setState({ data: data });
+      this.setState({ data: data, loadingLaunches: false });
     } catch (error) {
       if (error.response.status === 500) {
         this.setState({
@@ -205,6 +233,8 @@ export default class App extends Component {
                 primaryData={primaryData}
                 updateElements={this.updateElements}
               />
+
+              <Select handleValue={this.handleValue} />
             </div>
             {this.state.errorMessage && (
               <div className="error">

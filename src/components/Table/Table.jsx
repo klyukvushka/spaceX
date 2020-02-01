@@ -73,5 +73,5 @@ Table.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   sort: PropTypes.string,
   handleSorting: PropTypes.func,
-  loading: PropTypes.bool
+  loadingLaunches: PropTypes.bool
 };
