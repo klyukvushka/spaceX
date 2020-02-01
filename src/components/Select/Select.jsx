@@ -12,6 +12,7 @@ export default class Select extends Component {
   };
 
   render() {
+    const { options } = this.props;
     return (
       <form className="sorting-form">
         <label>
@@ -21,9 +22,15 @@ export default class Select extends Component {
             value={this.state.value}
             onChange={this.handleChange}
           >
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
+            {options.map((item, index) => {
+              // twice shown index in console
+              console.log(index);
+              return (
+                <option key={index} value={`${item}`}>
+                  {item}
+                </option>
+              );
+            })}
           </select>
         </label>
       </form>

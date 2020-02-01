@@ -234,7 +234,7 @@ export default class App extends Component {
                 updateElements={this.updateElements}
               />
 
-              <Select handleValue={this.handleValue} />
+              <Select handleValue={this.handleValue} options={[20, 30, 40]} />
             </div>
             {this.state.errorMessage && (
               <div className="error">
