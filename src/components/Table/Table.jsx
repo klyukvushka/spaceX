@@ -4,6 +4,10 @@ import { Loader } from "../Loader/Loader";
 import "./Table.scss";
 
 export default class Table extends Component {
+  state = {
+    selectedItemId: null
+  };
+
   formatDate = date => {
     let d = new Date(date),
       month = "" + (d.getMonth() + 1),
@@ -16,9 +20,26 @@ export default class Table extends Component {
     return [day, month, year].join(".");
   };
 
-  formatSuccess = parameter => {
-    if (!parameter) return "failure";
-    else return "success";
+  formatSuccess = (status, details) => {
+    if (
+      (status === true && details !== null) ||
+      (status === true && details === null)
+    ) {
+      return "success";
+    } else if (
+      (status === null && details === null) ||
+      (status === null && details !== null)
+    ) {
+      return "upcoming";
+    } else {
+      return "failure";
+    }
+  };
+
+  displayDetails = id => {
+    this.setState(state => ({
+      selectedItemId: state.selectedItemId === id ? null : id
+    }));
   };
 
   render() {
@@ -54,11 +75,21 @@ export default class Table extends Component {
               {data.map(item => (
                 <tr key={item.flight_number}>
                   <td>{item.flight_number}.</td>
-                  <td>{item.mission_name}</td>
+                  <td
+                    className="launch__mission"
+                    onClick={() => this.displayDetails(item.flight_number)}
+                  >
+                    {item.mission_name}
+                    {this.state.selectedItemId === item.flight_number && (
+                      <div className="launch__details">{item.details}</div>
+                    )}
+                  </td>
                   <td>{this.formatDate(item.launch_date_utc)}</td>
                   <td>{item.rocket.rocket_name}</td>
                   <td>{item.rocket.rocket_type}</td>
-                  <td>{this.formatSuccess(item.launch_success)}</td>
+                  <td>
+                    {this.formatSuccess(item.launch_success, item.details)}
+                  </td>
                 </tr>
               ))}
             </>
