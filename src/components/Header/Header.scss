@@ -1,4 +1,6 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
+
 .header {
   background: url(../../images/launch2.jpg) center no-repeat;
   background-size: cover;
@@ -19,7 +21,10 @@
     margin-bottom: 45px;
     color: #ffffff;
     transition: color 0.2s ease-in;
-
+    @include tablet-landscape {
+      font-size: 30px;
+      margin-bottom: 30px;
+    }
     &:hover {
       color: #2588f3;
       text-decoration: none;
@@ -29,7 +34,8 @@
 
 .date {
   background-color: rgba($color: #000000, $alpha: 0.5);
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
   border-radius: 15px;
   padding: 30px 40px;
   font-weight: bold;
@@ -39,23 +45,37 @@
     color: $color2;
     font-weight: bold;
     margin-bottom: 30px;
+    @include tablet-landscape {
+      font-size: 24px;
+      margin-bottom: 17px;
+    }
   }
   &__wrapper {
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+    @include tablet-landscape {
+      margin-bottom: 23px;
+    }
   }
   &__content {
     display: flex;
     flex-direction: column;
     font-size: 44px;
     color: #ffffff;
+    @include tablet-landscape {
+      font-size: 32px;
+    }
   }
   &__span {
     font-family: "Roboto", sans-serif;
     font-size: 28px;
     color: #b6d2fd;
     line-height: 44px;
+    @include tablet-landscape {
+      font-size: 20px;
+      line-height: 22px;
+    }
   }
 
   &__link {
@@ -73,5 +93,13 @@
       text-decoration: none;
       color: #ffffff;
     }
+    @include tablet-landscape {
+      padding: 2px 0;
+      font-size: 16px;
+    }
+  }
+  @include tablet-landscape {
+    max-width: 300px;
+    padding: 25px 25px;
   }
 }

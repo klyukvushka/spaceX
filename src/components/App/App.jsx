@@ -187,7 +187,7 @@ export default class App extends Component {
       primaryData
     } = this.state;
     return (
-      <main>
+      <main className="main">
         <section className="dragons">
           <div className="container">
             <h2 className="section-title">SpaceX dragons</h2>
@@ -247,13 +247,14 @@ export default class App extends Component {
                 long:)
               </div>
             )}
-
-            <Table
-              data={data}
-              handleSorting={this.handleSorting}
-              sort={sort}
-              loadingLaunches={loadingLaunches}
-            />
+            <div className="wrapper">
+              <Table
+                data={data}
+                handleSorting={this.handleSorting}
+                sort={sort}
+                loadingLaunches={loadingLaunches}
+              />
+            </div>
             {loadingLaunches ? (
               <Loader />
             ) : (

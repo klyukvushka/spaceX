@@ -1,8 +1,17 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
 .item {
   &__wrapper {
     width: 85%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @include desktop-s {
+      width: 100%;
+    }
+    @include tablets {
+      flex-direction: column;
+    }
   }
 }

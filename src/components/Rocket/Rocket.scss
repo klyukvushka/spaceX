@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .item {
   display: flex;
@@ -8,16 +9,30 @@
     margin-bottom: 0;
   }
   &__img {
+    flex-shrink: 0;
     width: 385px;
     max-width: 100%;
+    @include tablet-landscape {
+      height: 500px;
+      width: 350px;
+    }
   }
   &__name {
     font-size: 36px;
     line-height: 28px;
     margin-bottom: 22px;
+    @include tablet-landscape {
+      font-size: 30px;
+      line-height: 24px;
+      margin-bottom: 10px;
+    }
   }
   &__title {
     text-decoration: underline;
+    font-size: 24px;
+    @include tablet-landscape {
+      font-size: 22px;
+    }
   }
   &__name,
   &__title {
@@ -28,13 +43,28 @@
     display: flex;
     flex-direction: column;
     margin-left: 50px;
+    @include tablet-landscape {
+      margin-left: 30px;
+    }
+  }
+  &__description {
+    @include desktop-s {
+      margin-bottom: 10px;
+      line-height: 28px;
+    }
   }
   &__date {
     color: $color3;
     font-weight: bold;
+    @include desktop-s {
+      margin-bottom: 10px;
+    }
   }
   &__feature {
     display: flex;
+    @include tablet-landscape {
+      line-height: 28px;
+    }
   }
   &__property {
     color: $color3;
@@ -61,5 +91,8 @@
       text-decoration: none;
       color: darken($color2, 10%);
     }
+  }
+  @include tablet-landscape {
+    margin-bottom: 30px;
   }
 }
