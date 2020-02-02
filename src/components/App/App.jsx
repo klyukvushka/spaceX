@@ -17,6 +17,7 @@ import falconH from "../../images/falconH.jpg";
 import starship from "../../images/starship.png";
 import dragon1 from "../../images/dragon1.jpg";
 import dragon2 from "../../images/dragon2.jpg";
+import star from "../../images/icons/star.svg";
 
 export default class App extends Component {
   state = {
@@ -160,9 +161,12 @@ export default class App extends Component {
   handlePageClick = data => {
     const selectedPage = data.selected;
     const offset = selectedPage * this.state.perPage;
-    this.setState({ currentPage: selectedPage, offset: offset }, () => {
-      this.setElementsForCurrentPage();
-    });
+    this.setState(
+      { currentPage: selectedPage, offset: offset, loadingLaunches: true },
+      () => {
+        this.setElementsForCurrentPage();
+      }
+    );
   };
 
   // searching callback
@@ -253,23 +257,29 @@ export default class App extends Component {
             {loadingLaunches ? (
               <Loader />
             ) : (
-              <ReactPaginate
-                previousLabel={"prev"}
-                nextLabel={"next"}
-                breakLabel={"..."}
-                breakClassName={"break-me"}
-                pageCount={this.state.pageCount}
-                onPageChange={this.handlePageClick}
-                containerClassName={"pagination"}
-                activeClassName={"active"}
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                nextClassName="page-item"
-                previousLinkClassName="page-link"
-                nextLinkClassName="page-link"
-                forcePage={this.state.currentPage}
-              />
+              <>
+                <p className="launch__description">
+                  <img src={star} className="launch__star" alt="asterisk " /> —
+                  click to expand more information about the launch
+                </p>
+                <ReactPaginate
+                  previousLabel={"prev"}
+                  nextLabel={"next"}
+                  breakLabel={"..."}
+                  breakClassName={"break-me"}
+                  pageCount={this.state.pageCount}
+                  onPageChange={this.handlePageClick}
+                  containerClassName={"pagination"}
+                  activeClassName={"active"}
+                  pageClassName="page-item"
+                  pageLinkClassName="page-link"
+                  previousClassName="page-item"
+                  nextClassName="page-item"
+                  previousLinkClassName="page-link"
+                  nextLinkClassName="page-link"
+                  forcePage={this.state.currentPage}
+                />
+              </>
             )}
           </div>
         </section>

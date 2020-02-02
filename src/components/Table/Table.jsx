@@ -76,7 +76,10 @@ export default class Table extends Component {
                 <tr key={item.flight_number}>
                   <td>{item.flight_number}.</td>
                   <td
-                    className="launch__mission"
+                    className={
+                      "launch__mission " +
+                      (item.details !== null ? "launch__mission_mod" : "")
+                    }
                     onClick={() => this.displayDetails(item.flight_number)}
                   >
                     {item.mission_name}
