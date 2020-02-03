@@ -16,6 +16,10 @@
       height: 500px;
       width: 350px;
     }
+    @include tablet-portrait {
+      height: 415px;
+      width: 300px;
+    }
   }
   &__name {
     font-size: 36px;
@@ -26,12 +30,24 @@
       line-height: 24px;
       margin-bottom: 10px;
     }
+    @include tablet-portrait {
+      font-size: 26px;
+      line-height: 20px;
+      margin-bottom: 20px;
+    }
+    @include phone {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
   }
   &__title {
     text-decoration: underline;
     font-size: 24px;
     @include tablet-landscape {
       font-size: 22px;
+    }
+    @include tablet-portrait {
+      font-size: 20px;
     }
   }
   &__name,
@@ -46,11 +62,24 @@
     @include tablet-landscape {
       margin-left: 30px;
     }
+    @include tablet-portrait {
+      margin-left: 0;
+      align-items: center;
+    }
   }
   &__description {
     @include desktop-s {
       margin-bottom: 10px;
       line-height: 28px;
+    }
+    @include tablet-portrait {
+      line-height: 26px;
+      font-size: 15px;
+      text-align: center;
+      margin-top: 15px;
+    }
+    @include phone {
+      text-align: left;
     }
   }
   &__date {
@@ -70,6 +99,11 @@
     color: $color3;
     margin-right: 7px;
     font-weight: bold;
+  }
+  &__properties {
+    @include phone {
+      margin-bottom: 15px;
+    }
   }
   &__value {
     margin-left: 7px;
@@ -91,8 +125,15 @@
       text-decoration: none;
       color: darken($color2, 10%);
     }
+    @include phone {
+      margin-top: 8px;
+    }
   }
   @include tablet-landscape {
     margin-bottom: 30px;
+  }
+  @include tablet-portrait {
+    flex-direction: column;
+    align-items: center;
   }
 }

@@ -29,31 +29,6 @@
   }
 }
 
-.btn {
-  outline: none;
-  border: 0;
-  border-radius: 5px;
-  display: inline-block;
-  color: #ffffff;
-  width: 85px;
-  height: 35px;
-  box-shadow: none !important;
-  &:focus {
-    border-color: transparent;
-  }
-  &-success {
-    background-color: $color2;
-    margin-left: 10px;
-    border-color: transparent;
-    &:hover {
-      background-color: darken($color2, 10%);
-    }
-    &:not(:disabled):not(.disabled):active {
-      background-color: lighten($color2, 10%);
-    }
-  }
-}
-
 .page-link {
   &:hover {
     cursor: pointer;
@@ -61,6 +36,9 @@
 
   &:focus {
     box-shadow: none;
+  }
+  @include phone {
+    padding: 6px 10px;
   }
 }
 

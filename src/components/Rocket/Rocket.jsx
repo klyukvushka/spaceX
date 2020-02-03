@@ -69,9 +69,10 @@ export default class Rocket extends Component {
     const videoId = this.props.videoId;
     return (
       <div className="item" key={id}>
+        <h3 className="item__name d-sm-block d-md-none">{name}</h3>
         <img src={imgSrc} alt="rocket" className="item__img" />
         <div className="item__content">
-          <h3 className="item__name">{name}</h3>
+          <h3 className="item__name d-none d-md-block">{name}</h3>
           <p className="item__description">{description}</p>
           <p className="item__date">
             First flight — {this.formatDate(firstFlight)}

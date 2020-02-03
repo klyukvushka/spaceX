@@ -13,5 +13,8 @@
     @include tablets {
       flex-direction: column;
     }
+    @include phone {
+      flex-direction: column;
+    }
   }
 }

@@ -7,17 +7,33 @@
   color: $color1;
   font-size: 40px;
   font-weight: 700;
+  @include tablet-landscape {
+    font-size: 34px;
+    margin: 35px 0 25px;
+  }
+  @include tablet-portrait {
+    font-size: 30px;
+    margin: 25px 0;
+  }
+  @include phone {
+    font-size: 26px;
+    margin: 20px 0;
+  }
   &_header {
     text-align: left;
     font-size: 58px;
     margin: 35px 0;
     @include tablet-landscape {
-      font-size: 45px;
+      font-size: 46px;
       margin: 25px 0;
     }
-  }
-  @include tablet-landscape {
-    font-size: 34px;
-    margin: 35px 0 25px;
+    @include tablet-portrait {
+      font-size: 34px;
+      margin: 15px 0;
+    }
+    @include phone {
+      font-size: 32px;
+      margin: 15px 0;
+    }
   }
 }

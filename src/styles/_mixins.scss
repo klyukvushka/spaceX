@@ -11,7 +11,7 @@
   }
 }
 @mixin tablet-landscape {
-  @media screen and (min-width: $tablet-portrait + 1px) and (max-width: $desktop - 1px) {
+  @media screen and (max-width: $desktop - 1px) {
     @content;
   }
 }

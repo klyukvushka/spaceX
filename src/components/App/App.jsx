@@ -18,6 +18,7 @@ import starship from "../../images/starship.png";
 import dragon1 from "../../images/dragon1.jpg";
 import dragon2 from "../../images/dragon2.jpg";
 import star from "../../images/icons/star.svg";
+import swipe from "../../images/icons/swipe.svg";
 
 export default class App extends Component {
   state = {
@@ -240,6 +241,7 @@ export default class App extends Component {
 
               <Select handleValue={this.handleValue} options={[20, 30, 40]} />
             </div>
+
             {this.state.errorMessage && (
               <div className="error">
                 <b>500 internal server error</b> <br />
@@ -247,7 +249,7 @@ export default class App extends Component {
                 long:)
               </div>
             )}
-            <div className="wrapper">
+            <div className="launch__wrapper">
               <Table
                 data={data}
                 handleSorting={this.handleSorting}
@@ -259,10 +261,15 @@ export default class App extends Component {
               <Loader />
             ) : (
               <>
-                <p className="launch__description">
-                  <img src={star} className="launch__star" alt="asterisk " /> —
-                  click to expand more information about the launch
-                </p>
+                <div className="table-addition">
+                  <p className="launch__description">
+                    <img src={star} className="launch__star" alt="asterisk " />{" "}
+                    — click to expand more information about the launch
+                  </p>
+                  <p className="launch__description d-sm-block d-md-none">
+                    <img src={swipe} alt="swipe-icon" /> — swipe the table to the left
+                  </p>
+                </div>
                 <ReactPaginate
                   previousLabel={"prev"}
                   nextLabel={"next"}

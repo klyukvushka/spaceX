@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 
 .form {
   display: flex;
@@ -19,6 +20,12 @@
   &-message {
     color: red;
   }
+  @include tablet-portrait {
+    flex-basis: 76%;
+  }
+  @include phone {
+    flex-basis: 100%;
+  }
 }
 
 .btn {
@@ -33,18 +40,30 @@
   &:focus {
     border-color: transparent;
   }
-  &-success {
+  &-search {
     background-color: $color2;
     margin-left: 10px;
     border-color: transparent;
     &:hover {
       background-color: darken($color2, 10%);
+      @include phone {
+        background-color: transparent;
+      }
     }
     &:not(:disabled):not(.disabled):active {
       background-color: lighten($color2, 10%);
+      @include phone {
+        background-color: transparent;
+      }
     }
     &:focus {
       background-color: $color2;
+      @include phone {
+        background-color: transparent;
+      }
+    }
+    @include phone {
+      background-color: transparent;
     }
   }
   &-reset {
@@ -58,5 +77,9 @@
     &:hover {
       opacity: 0.75;
     }
+  }
+  @include phone {
+    padding: 0;
+    width: 35px;
   }
 }

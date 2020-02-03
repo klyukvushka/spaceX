@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import "./Search.scss";
 import icon from "../../images/icons/restart.svg";
+import search from "../../images/icons/search.svg";
 
 export default class SearchForm extends Component {
   state = {
@@ -64,12 +65,13 @@ export default class SearchForm extends Component {
 
           <button
             type="submit"
-            className="btn btn-success"
+            className="btn btn-search"
             onClick={() => {
               this.props.updateElements(this.state.data);
             }}
           >
-            Search
+            <span className="d-none d-sm-block">Search</span>
+            <img src={search} className="d-block d-sm-none" alt="search-icon" />
           </button>
 
           <button

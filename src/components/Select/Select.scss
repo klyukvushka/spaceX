@@ -1,7 +1,11 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 .sorting-form {
   margin-left: 15px;
   color: darken($color2, 15%);
+  @include phone {
+    margin-left: 0;
+  }
 }
 
 .select {

@@ -1,11 +1,21 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 .launch {
+  .container {
+    @include tablet-portrait {
+      max-width: 100%;
+    }
+  }
   &__top {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 5px;
+    @include phone {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      border-bottom: 1px solid #f4f4f4;
+    }
   }
   &__star {
     width: 10px;
@@ -16,11 +26,18 @@
     padding-top: 10px;
     border-top: 1px solid #f4f4f4;
   }
+  &__wrapper {
+    @include tablet-portrait {
+      width: 100%;
+      overflow-x: scroll;
+    }
+  }
   &__table {
     width: 100%;
     position: relative;
-    counter-reset: rowNumber;
-
+    @include tablet-portrait {
+      width: 900px;
+    }
     thead {
       border-bottom: 2px solid #f4f4f4;
 
@@ -92,17 +109,11 @@
     line-height: 28px;
     font-weight: 400;
     margin-right: 20px;
+    @include phone {
+      max-width: 295px;
+    }
   }
 }
-
-// table tbody tr {
-//   counter-increment: rowNumber;
-// }
-
-// table tr td:first-child::before {
-//   content: counter(rowNumber);
-//   min-width: 1em;
-// }
 
 .icon {
   position: relative;
