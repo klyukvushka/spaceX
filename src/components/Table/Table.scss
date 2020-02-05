@@ -90,11 +90,10 @@
       position: relative;
       cursor: pointer;
       &:before {
+        display: inline-block;
         position: absolute;
-        content: "";
-        background: url(../../images/icons/star.svg) no-repeat center;
-        background-size: contain;
-        top: 18px;
+        content: url("../../images/icons/stars.png");
+        top: 4px;
         left: -7px;
         width: 7px;
         height: 7px;
