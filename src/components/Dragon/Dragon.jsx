@@ -16,7 +16,9 @@ export default class Dragon extends Component {
     height: null,
     mass: null,
     diameter: null,
-    isOpen: false
+    isOpen: false,
+    breakpointMd: 991,
+    active: false
   };
 
   componentDidMount = () => {
@@ -59,6 +61,14 @@ export default class Dragon extends Component {
     });
   };
 
+  adaptiveAccordion = () => {
+    if (window.innerWidth <= this.state.breakpointMd) {
+      this.setState({
+        active: !this.state.active
+      });
+    }
+  };
+
   render() {
     const {
       id,
@@ -78,6 +88,8 @@ export default class Dragon extends Component {
 
     const imgSrc = this.props.imgSrc;
     const videoId = this.props.videoId;
+
+    const activeClass = this.state.active ? "active" : "";
     return (
       <div className="item" key={id}>
         <h3 className="item__name d-sm-block d-md-none">{name}</h3>
@@ -89,52 +101,59 @@ export default class Dragon extends Component {
             First flight — {this.formatDate(firstFlight)}
           </p>
           <div className="item__wrapper">
-            <div className="item__properties">
-              <h4 className="item__title">General characteristics: </h4>
+            <div className={`item__properties ${activeClass}`}>
+              <h4 className="item__title" onClick={this.adaptiveAccordion}>
+                General characteristics
+              </h4>
 
-              <div className="item__feature">
-                <div className="item__property">Orbit duration</div> —
-                <div className="item__value">{orbitDuration}</div>
-              </div>
+              <div className="item__features">
+                <div className="item__feature">
+                  <div className="item__property">Orbit duration</div> —
+                  <div className="item__value">{orbitDuration}</div>
+                </div>
 
-              <div className="item__feature">
-                <div className="item__property">Dry mass</div> —
-                <div className="item__value">{mass} kg</div>
-              </div>
+                <div className="item__feature">
+                  <div className="item__property">Dry mass</div> —
+                  <div className="item__value">{mass} kg</div>
+                </div>
 
-              <div className="item__feature">
-                <div className="item__property">Trunk volume</div> —
-                <div className="item__value">{trunkVolume} m³</div>
-              </div>
+                <div className="item__feature">
+                  <div className="item__property">Trunk volume</div> —
+                  <div className="item__value">{trunkVolume} m³</div>
+                </div>
 
-              <div className="item__feature">
-                <div className="item__property">Height w/trunk</div> —
-                <div className="item__value">{heightWtrunk} m</div>
-              </div>
-              <div className="item__feature">
-                <div className="item__property">Dragon diameter</div> —
-                <div className="item__value">{dragonDiameter} m</div>
+                <div className="item__feature">
+                  <div className="item__property">Height w/trunk</div> —
+                  <div className="item__value">{heightWtrunk} m</div>
+                </div>
+                <div className="item__feature">
+                  <div className="item__property">Dragon diameter</div> —
+                  <div className="item__value">{dragonDiameter} m</div>
+                </div>
               </div>
             </div>
-            <div className="item__properties">
-              <h4 className="item__title">Payload characteristics: </h4>
+            <div className={`item__properties ${activeClass}`}>
+              <h4 className="item__title" onClick={this.adaptiveAccordion}>
+                Payload characteristics
+              </h4>
+              <div className="item__features">
+                <div className="item__feature">
+                  <div className="item__property">Launch payload mass</div> —
+                  <div className="item__value">{launchPayloadMass} kg</div>
+                </div>
+                <div className="item__feature">
+                  <div className="item__property">Launch payload volume</div> —
+                  <div className="item__value">{launchPayloadVol} m³</div>
+                </div>
 
-              <div className="item__feature">
-                <div className="item__property">Launch payload mass</div> —
-                <div className="item__value">{launchPayloadMass} kg</div>
-              </div>
-              <div className="item__feature">
-                <div className="item__property">Launch payload volume</div> —
-                <div className="item__value">{launchPayloadVol} m³</div>
-              </div>
-
-              <div className="item__feature">
-                <div className="item__property">Return payload mass</div> —
-                <div className="item__value">{returnPayloadMass} kg</div>
-              </div>
-              <div className="item__feature">
-                <div className="item__property">Return payload volume</div> —
-                <div className="item__value">{returnPayloadVol} m³</div>
+                <div className="item__feature">
+                  <div className="item__property">Return payload mass</div> —
+                  <div className="item__value">{returnPayloadMass} kg</div>
+                </div>
+                <div className="item__feature">
+                  <div className="item__property">Return payload volume</div> —
+                  <div className="item__value">{returnPayloadVol} m³</div>
+                </div>
               </div>
             </div>
           </div>
