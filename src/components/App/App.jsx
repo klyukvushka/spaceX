@@ -17,7 +17,7 @@ import falconH from "../../images/falconH.jpg";
 import starship from "../../images/starship.png";
 import dragon1 from "../../images/dragon1.jpg";
 import dragon2 from "../../images/dragon2.jpg";
-import star from "../../images/icons/star.svg";
+import star from "../../images/icons/stars.png";
 import swipe from "../../images/icons/swipe.svg";
 
 export default class App extends Component {
