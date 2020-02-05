@@ -1,31 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e9b940a0491a7dfb777044c3feaed39b",
+    "revision": "b4783bafabf643fbcb04b1ad18f41328",
     "url": "/spaceX/index.html"
   },
   {
-    "revision": "73b4be9acf080f10d064",
-    "url": "/spaceX/static/css/2.17e5ed98.chunk.css"
+    "revision": "4b220b6d87a8d5ac2333",
+    "url": "/spaceX/static/css/2.47e06e2e.chunk.css"
   },
   {
-    "revision": "67f65cb352b76b6a3d0d",
-    "url": "/spaceX/static/css/main.b2bcbdd0.chunk.css"
+    "revision": "d89030c9ef4a33b60bd6",
+    "url": "/spaceX/static/css/main.32c44465.chunk.css"
   },
   {
-    "revision": "73b4be9acf080f10d064",
-    "url": "/spaceX/static/js/2.6e90d700.chunk.js"
+    "revision": "4b220b6d87a8d5ac2333",
+    "url": "/spaceX/static/js/2.5e7d3d4f.chunk.js"
   },
   {
-    "revision": "c6d01cb19213691bc81a274434d00fe7",
-    "url": "/spaceX/static/js/2.6e90d700.chunk.js.LICENSE"
+    "revision": "d705cb622423d72c5defbf368ca70dcc",
+    "url": "/spaceX/static/js/2.5e7d3d4f.chunk.js.LICENSE"
   },
   {
-    "revision": "67f65cb352b76b6a3d0d",
-    "url": "/spaceX/static/js/main.1cb500c4.chunk.js"
+    "revision": "d89030c9ef4a33b60bd6",
+    "url": "/spaceX/static/js/main.d779376f.chunk.js"
   },
   {
-    "revision": "3774c4ea9439e9346d41",
-    "url": "/spaceX/static/js/runtime-main.94550fbf.js"
+    "revision": "2099616278160d25d640",
+    "url": "/spaceX/static/js/runtime-main.c40e99ae.js"
+  },
+  {
+    "revision": "a4e2f83c3aa689ec60447ad1125d2f78",
+    "url": "/spaceX/static/media/arrow.a4e2f83c.svg"
   },
   {
     "revision": "c58f41433fa9660d1579184556acb76f",
@@ -64,7 +68,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/spaceX/static/media/restart.0d6f6d7f.svg"
   },
   {
+    "revision": "5e5192d98025911249c7a32d6003dec1",
+    "url": "/spaceX/static/media/search.5e5192d9.svg"
+  },
+  {
+    "revision": "3df08569dc4623d7f6daeeba0f541d57",
+    "url": "/spaceX/static/media/star.3df08569.svg"
+  },
+  {
     "revision": "5ee89305aae01b3c153fb967615a1606",
     "url": "/spaceX/static/media/starship.5ee89305.png"
+  },
+  {
+    "revision": "9e4624e53f88dbd6762efaa00aab327d",
+    "url": "/spaceX/static/media/swipe.9e4624e5.svg"
   }
 ]);
