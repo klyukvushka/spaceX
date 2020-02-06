@@ -17,7 +17,7 @@ import falconH from "../../images/falconH.jpg";
 import starship from "../../images/starship.png";
 import dragon1 from "../../images/dragon1.jpg";
 import dragon2 from "../../images/dragon2.jpg";
-import star from "../../images/icons/stars.png";
+import star from "../../images/icons/star.png";
 import swipe from "../../images/icons/swipe.svg";
 
 export default class App extends Component {
@@ -267,7 +267,8 @@ export default class App extends Component {
                     — click to expand more information about the launch
                   </p>
                   <p className="launch__description d-sm-block d-md-none">
-                    <img src={swipe} alt="swipe-icon" /> — swipe the table to the left
+                    <img src={swipe} alt="swipe-icon" /> — swipe the table to
+                    the left
                   </p>
                 </div>
                 <ReactPaginate

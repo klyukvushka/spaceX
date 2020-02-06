@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import "./Search.scss";
 import icon from "../../images/icons/restart.svg";
 import search from "../../images/icons/search.svg";
-
+// import  Button  from "../Button/Button";
+import "../Button/Button.scss";
 export default class SearchForm extends Component {
   state = {
     data: [],
@@ -11,11 +12,9 @@ export default class SearchForm extends Component {
     message: ""
   };
 
-  inputRef = React.createRef();
-
-  handleChange = () => {
+  handleChange = event => {
     const { primaryData } = this.props;
-    const value = this.inputRef.current.value;
+    const value = event.target.value;
 
     this.setState({ inputValue: value });
 
@@ -26,22 +25,26 @@ export default class SearchForm extends Component {
         );
       });
 
-      this.setState({ data: filteredData });
-    } else {
-      this.setState({
-        data: primaryData
-      });
+      if (filteredData.length > 0) {
+        this.setState({
+          data: filteredData,
+          message: ""
+        });
+      } else {
+        this.setState({
+          data: [],
+          message:
+            "Sorry, there is no results for your request. Try to enter the correct mission name"
+        });
+      }
     }
   };
 
   onSubmit = event => {
     event.preventDefault();
-    const { primaryData } = this.props;
-
     if (this.state.inputValue === "") {
       this.setState({
-        message: "Oops! Please, enter mission name for searching",
-        data: primaryData
+        message: "Oops! Please, enter mission name for searching"
       });
     }
   };
@@ -53,7 +56,6 @@ export default class SearchForm extends Component {
       <form className="form" onSubmit={this.onSubmit}>
         <div className="form-group">
           <input
-            ref={this.inputRef}
             type="text"
             name="search"
             aria-label="Search"
@@ -82,14 +84,30 @@ export default class SearchForm extends Component {
               this.props.updateElements(this.props.primaryData);
             }}
           >
-            <img
-              src={icon}
-              alt="reset-icon"
-              onClick={() => {
-                this.props.updateElements(this.state.data);
-              }}
-            />
+            <img src={icon} alt="reset-icon" />
           </button>
+
+          {/* <Button
+            className=" btn-search"
+            type="submit"
+            onClick={() => {
+              this.props.updateElements(this.state.data);
+            }}
+          >
+            <span className="d-none d-sm-block">Search</span>
+            <img src={search} className="d-block d-sm-none" alt="search-icon" />
+          </Button> */}
+
+          {/* <Button
+            type="reset"
+            className=" btn-reset"
+            onClick={() => {
+              this.setState({ inputValue: "", message: "" });
+              this.props.updateElements(this.props.primaryData);
+            }}
+          >
+            <img src={icon} alt="reset-icon" />
+          </Button> */}
         </div>
         <div className="form-message">{this.state.message}</div>
       </form>

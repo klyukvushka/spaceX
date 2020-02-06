@@ -24,7 +24,7 @@ export default class Select extends Component {
           >
             {options.map((item, index) => {
               // twice shown index in console
-              console.log(index);
+              // console.log(index);
               return (
                 <option key={index} value={`${item}`}>
                   {item}
