@@ -1,0 +1,37 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.page-link {
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+  @include phone {
+    padding: 6px 10px;
+  }
+}
+
+.pagination {
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.page-item.active .page-link {
+  background-color: #42a7fe;
+  border-color: #42a7fe;
+}
+
+.hint {
+  font-size: 14px;
+  padding-top: 10px;
+  border-top: 1px solid #f4f4f4;
+  &_mod {
+    img {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}

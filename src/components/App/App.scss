@@ -28,26 +28,3 @@
     }
   }
 }
-
-.page-link {
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:focus {
-    box-shadow: none;
-  }
-  @include phone {
-    padding: 6px 10px;
-  }
-}
-
-.pagination {
-  margin: 20px 0;
-  justify-content: center;
-}
-
-.page-item.active .page-link {
-  background-color: #42a7fe;
-  border-color: #42a7fe;
-}

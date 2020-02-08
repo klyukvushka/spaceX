@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import { Loader } from "../Loader/Loader";
-import Header from "../Header/Header";
-import { Footer } from "../Footer/Footer";
-import App from "../App/App";
 
-export const MainPage = () => {
+import Launches from "../Launches/Launches";
+
+const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,12 +22,12 @@ export const MainPage = () => {
       ) : (
         <>
           <article className="content">
-            <Header /> <App />
+            <Launches />
           </article>
-
-          <Footer />
         </>
       )}
     </>
   );
 };
+
+export default Home;

@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 import "./Button.scss";
 
-export const Button = ({ children, className, ...attrs }) => {
+const Button = ({ children, className, ...attrs }) => {
   const classes = classNames("btn", className);
   return (
     <Button className={classes} {...attrs}>
@@ -22,3 +22,5 @@ Button.defaultProps = {
   children: null,
   className: ""
 };
+
+export default Button;
