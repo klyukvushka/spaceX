@@ -9,7 +9,9 @@ import "./index.css";
 import Loader from "./components/Loader/Loader";
 
 const App = lazy(() => import("./components/App/App"));
-const Home = lazy(() => import("./components/Home/Home"));
+const LaunchesPage = lazy(() =>
+  import("./components/LaunchesPage/LaunchesPage")
+);
 const Dragons = lazy(() => import("./components/Dragons/Dragons"));
 const Rockets = lazy(() => import("./components/Rockets/Rockets"));
 
@@ -24,7 +26,7 @@ ReactDOM.render(
     >
       <App>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={LaunchesPage} />
           <Route path="/dragons" component={Dragons} />
           <Route path="/rockets" component={Rockets} />
         </Switch>

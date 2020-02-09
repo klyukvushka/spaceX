@@ -72,7 +72,7 @@ export default class Header extends Component {
             <ul className="nav">
               <li>
                 <NavLink exact to={"/"} className="nav__link">
-                  Home
+                  Launches
                 </NavLink>
               </li>
               <li>
@@ -114,13 +114,18 @@ export default class Header extends Component {
                 </div>
               </div>
               <a
-                href="http://"
+                href="https://www.youtube.com/channel/UCtI0Hodo5o5dUb67FeUjDeA"
                 className="date__link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 Remind me
               </a>
+              <p className="date__description">
+                Subscribe to the SpaceX channel on Youtube. All launches
+                broadcasts are held here. Click on the bell to receive
+                notifications
+              </p>
             </div>
           </div>
         </div>
