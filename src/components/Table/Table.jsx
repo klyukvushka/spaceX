@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Loader } from "../Loader/Loader";
+import Loader from "../Loader/Loader";
 import "./Table.scss";
 
 export default class Table extends Component {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import { request } from "../../requests/request";
 
 import "./Header.scss";
@@ -67,6 +68,25 @@ export default class Header extends Component {
     return (
       <header className="header">
         <div className="container">
+          <nav className="navigation">
+            <ul className="nav">
+              <li>
+                <NavLink exact to={"/"} className="nav__link">
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/dragons"} className="nav__link">
+                  Dragons
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={"/rockets"} className="nav__link">
+                  Rockets
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
           <div className="header__content">
             <h1 className="section-title section-title_header">
               Upcoming launch

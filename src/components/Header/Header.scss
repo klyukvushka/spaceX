@@ -5,14 +5,10 @@
   background: url(../../images/launch2.jpg) center no-repeat;
   background-size: cover;
   height: 100vh;
-  .container {
-    height: inherit;
-    display: flex;
-    align-items: center;
-  }
   &__content {
     display: flex;
     flex-direction: column;
+    margin-top: 125px;
   }
 
   &__subtitle {
@@ -36,6 +32,41 @@
     &:hover {
       color: #2588f3;
       text-decoration: none;
+    }
+  }
+}
+
+.navigation {
+  padding-top: 40px;
+}
+
+.nav {
+  justify-content: space-between;
+  max-width: 440px;
+  @include tablet-landscape {
+    max-width: 355px;
+  }
+  @include tablet-portrait {
+    max-width: 275px;
+  }
+  &__link {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+    &:hover {
+      color: #ffffff;
+    }
+    &.active {
+      text-decoration: underline;
+    }
+    @include desktop-s {
+      font-size: 24px;
+    }
+    @include tablet-landscape {
+      font-size: 22px;
+    }
+    @include tablet-portrait {
+      font-size: 18px;
     }
   }
 }

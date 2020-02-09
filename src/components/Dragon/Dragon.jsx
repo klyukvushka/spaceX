@@ -4,6 +4,7 @@ import ModalVideo from "react-modal-video";
 import PropTypes from "prop-types";
 import { request } from "../../requests/request";
 import "./Dragon.scss";
+import "../Rocket/Rocket.scss";
 import iconPlay from "../../images/icons/play.svg";
 
 export default class Dragon extends Component {

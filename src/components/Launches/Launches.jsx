@@ -9,7 +9,7 @@ import SearchForm from "../Search/Search";
 import Select from "../Select/Select";
 import Hint from "../Hint/Hint";
 
-import { Loader } from "../Loader/Loader";
+import Loader from "../Loader/Loader";
 import { request } from "../../requests/request";
 
 import star from "../../images/icons/star.png";

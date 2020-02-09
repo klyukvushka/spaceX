@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Loader } from "../Loader/Loader";
+// import { Loader } from "../Loader/Loader";
 
 import Launches from "../Launches/Launches";
 
@@ -15,17 +15,17 @@ const Home = () => {
 
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <div className="loader-wrapper">
           <Loader />
         </div>
-      ) : (
-        <>
-          <article className="content">
-            <Launches />
-          </article>
-        </>
-      )}
+      ) : ( */}
+
+      <article className="content">
+        <Launches />
+      </article>
+
+      {/* )} */}
     </>
   );
 };
