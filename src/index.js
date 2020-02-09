@@ -16,7 +16,7 @@ const Dragons = lazy(() => import("./components/Dragons/Dragons"));
 const Rockets = lazy(() => import("./components/Rockets/Rockets"));
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Suspense
       fallback={
         <div className="loader-wrapper">
