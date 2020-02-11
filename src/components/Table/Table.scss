@@ -1,77 +1,53 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
-.launch {
-  .container {
-    @include tablet-portrait {
-      max-width: 100%;
-    }
+.table {
+  width: 100%;
+  position: relative;
+  @include tablet-portrait {
+    width: 900px;
   }
-  &__top {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5px;
-    @include phone {
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      border-bottom: 1px solid #f4f4f4;
-    }
-  }
+  thead {
+    border-bottom: 2px solid #f4f4f4;
 
-  &__wrapper {
-    @include tablet-portrait {
-      width: 100%;
-      overflow-x: scroll;
+    tr {
+      background-color: #ffffff !important;
     }
   }
-  &__table {
-    width: 100%;
+  th {
+    padding: 10px 5px;
+    color: $color1;
+    position: sticky;
+    z-index: 3;
+    top: 0;
+    height: 45px;
+    background-color: #ffffff;
+  }
+  .th-click {
+    cursor: pointer;
+  }
+  tbody {
     position: relative;
-    @include tablet-portrait {
-      width: 900px;
+    .loader {
+      position: absolute;
+      z-index: 2;
     }
-    thead {
-      border-bottom: 2px solid #f4f4f4;
-
-      tr {
-        background-color: #ffffff !important;
-      }
+    .loader-tr {
+      background-color: #ffffff !important;
     }
-    th {
-      padding: 10px 5px;
-      color: $color1;
-      position: sticky;
-      z-index: 3;
-      top: 0;
-      height: 45px;
-      background-color: #ffffff;
-    }
-    .th-click {
-      cursor: pointer;
-    }
-    tbody {
-      position: relative;
-      .loader {
-        position: absolute;
-        z-index: 2;
-      }
-      .loader-tr {
-        background-color: #ffffff !important;
-      }
-    }
-    td {
-      padding: 10px 5px;
-    }
-    tr:hover {
+  }
+  td {
+    padding: 10px 5px;
+  }
+  tr:hover {
+    background-color: #d6e6f1;
+  }
+  tr:nth-child(odd) {
+    background-color: #f3f3f3;
+    &:hover {
       background-color: #d6e6f1;
     }
-    tr:nth-child(odd) {
-      background-color: #f3f3f3;
-      &:hover {
-        background-color: #d6e6f1;
-      }
-    }
   }
+
   &__cell {
     text-align: center;
   }

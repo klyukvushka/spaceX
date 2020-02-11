@@ -19,7 +19,7 @@ export default class Dragon extends Component {
     diameter: null,
     isOpen: false,
     breakpointMd: 991,
-    active: false
+    activeId: null
   };
 
   componentDidMount = () => {
@@ -90,7 +90,6 @@ export default class Dragon extends Component {
     const imgSrc = this.props.imgSrc;
     const videoId = this.props.videoId;
 
-    const activeClass = this.state.activeId ? "active" : "";
     return (
       <div className="item" key={id}>
         <h3 className="item__name d-sm-block d-md-none">{name}</h3>
@@ -102,7 +101,11 @@ export default class Dragon extends Component {
             First flight — {this.formatDate(firstFlight)}
           </p>
           <div className="item__wrapper">
-            <div className={`item__properties ${activeClass}`}>
+            <div
+              className={`item__properties ${
+                this.state.activeId === 1 ? "active" : ""
+              }`}
+            >
               <h4
                 className="item__title"
                 onClick={() => this.adaptiveAccordion(1)}
@@ -136,7 +139,11 @@ export default class Dragon extends Component {
                 </div>
               </div>
             </div>
-            <div className={`item__properties ${activeClass}`}>
+            <div
+              className={`item__properties ${
+                this.state.activeId === 2 ? "active" : ""
+              }`}
+            >
               <h4
                 className="item__title"
                 onClick={() => this.adaptiveAccordion(2)}

@@ -45,7 +45,7 @@ export default class Table extends Component {
   render() {
     const { data, loadingLaunches } = this.props;
     return (
-      <table className="launch__table">
+      <table className="table">
         <thead>
           <tr>
             <th> №</th>
