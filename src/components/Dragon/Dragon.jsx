@@ -62,11 +62,11 @@ export default class Dragon extends Component {
     });
   };
 
-  adaptiveAccordion = () => {
+  adaptiveAccordion = id => {
     if (window.innerWidth <= this.state.breakpointMd) {
-      this.setState({
-        active: !this.state.active
-      });
+      this.setState(prevState => ({
+        activeId: prevState.activeId === id ? null : id
+      }));
     }
   };
 
@@ -90,7 +90,7 @@ export default class Dragon extends Component {
     const imgSrc = this.props.imgSrc;
     const videoId = this.props.videoId;
 
-    const activeClass = this.state.active ? "active" : "";
+    const activeClass = this.state.activeId ? "active" : "";
     return (
       <div className="item" key={id}>
         <h3 className="item__name d-sm-block d-md-none">{name}</h3>
@@ -103,7 +103,10 @@ export default class Dragon extends Component {
           </p>
           <div className="item__wrapper">
             <div className={`item__properties ${activeClass}`}>
-              <h4 className="item__title" onClick={this.adaptiveAccordion}>
+              <h4
+                className="item__title"
+                onClick={() => this.adaptiveAccordion(1)}
+              >
                 General characteristics
               </h4>
 
@@ -134,7 +137,10 @@ export default class Dragon extends Component {
               </div>
             </div>
             <div className={`item__properties ${activeClass}`}>
-              <h4 className="item__title" onClick={this.adaptiveAccordion}>
+              <h4
+                className="item__title"
+                onClick={() => this.adaptiveAccordion(2)}
+              >
                 Payload characteristics
               </h4>
               <div className="item__features">

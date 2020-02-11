@@ -1,33 +1,13 @@
-import React, { useEffect, useState } from "react";
-
-// import { Loader } from "../Loader/Loader";
+import React from "react";
 
 import Launches from "../Launches/Launches";
 
-const Home = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  });
-
+const LaunchesPage = () => {
   return (
-    <>
-      {/* {loading ? (
-        <div className="loader-wrapper">
-          <Loader />
-        </div>
-      ) : ( */}
-
-      <article className="content">
-        <Launches />
-      </article>
-
-      {/* )} */}
-    </>
+    <article className="content">
+      <Launches />
+    </article>
   );
 };
 
-export default Home;
+export default LaunchesPage;

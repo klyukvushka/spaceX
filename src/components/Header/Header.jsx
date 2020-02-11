@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { request } from "../../requests/request";
+import Loader from "../Loader/Loader";
 
 import "./Header.scss";
 
@@ -12,7 +13,8 @@ export default class Header extends Component {
     month: 0,
     year: 0,
     mission: "",
-    link: ""
+    link: "",
+    loading: true
   };
   componentDidMount = async () => {
     try {
@@ -23,7 +25,7 @@ export default class Header extends Component {
       const data = response.data.filter(item => {
         return item.upcoming === true;
       });
-      this.setState({ data });
+      this.setState({ data: data, loading: false });
 
       this.defineLaunchDate();
     } catch (error) {
@@ -65,6 +67,8 @@ export default class Header extends Component {
   };
 
   render() {
+    const { loading } = this.state;
+
     return (
       <header className="header">
         <div className="container">
@@ -91,41 +95,53 @@ export default class Header extends Component {
             <h1 className="section-title section-title_header">
               Upcoming launch
             </h1>
-            <a
-              href={this.state.link}
-              className="header__subtitle"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Mission {this.state.mission}
-            </a>
 
-            <div className="date">
-              <h3 className="date__title">Launching on </h3>
-              <div className="date__wrapper">
-                <div className="date__content">
-                  {this.state.day} <span className="date__span">day</span>
-                </div>
-                <div className="date__content">
-                  {this.state.month} <span className="date__span">month</span>
-                </div>
-                <div className="date__content">
-                  {this.state.year} <span className="date__span">year</span>
-                </div>
-              </div>
-              <a
-                href="https://www.youtube.com/channel/UCtI0Hodo5o5dUb67FeUjDeA"
-                className="date__link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Remind me
-              </a>
-              <p className="date__description">
-                Subscribe to the SpaceX channel on Youtube. All launches
-                broadcasts are held here. Click on the bell to receive
-                notifications
-              </p>
+            <div className="launching-info">
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <a
+                    href={this.state.link}
+                    className="header__subtitle"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Mission {this.state.mission}
+                  </a>
+
+                  <div className="launching">
+                    <h3 className="launching__title">Launching on </h3>
+                    <div className="launching__wrapper">
+                      <div className="launching__content">
+                        {this.state.day}
+                        <span className="launching__span">day</span>
+                      </div>
+                      <div className="launching__content">
+                        {this.state.month}
+                        <span className="launching__span">month</span>
+                      </div>
+                      <div className="launching__content">
+                        {this.state.year}
+                        <span className="launching__span">year</span>
+                      </div>
+                    </div>
+                    <a
+                      href="https://www.youtube.com/channel/UCtI0Hodo5o5dUb67FeUjDeA"
+                      className="launching__link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Remind me
+                    </a>
+                    <p className="launching__description">
+                      Subscribe to the SpaceX channel on Youtube. All launches
+                      broadcasts are held here. Click on the bell to receive
+                      notifications
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

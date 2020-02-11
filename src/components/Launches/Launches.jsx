@@ -9,7 +9,7 @@ import SearchForm from "../Search/Search";
 import Select from "../Select/Select";
 import Hint from "../Hint/Hint";
 
-import Loader from "../Loader/Loader";
+// import  Loader from "../Loader/Loader";
 import { request } from "../../requests/request";
 
 import star from "../../images/icons/star.png";
@@ -203,42 +203,37 @@ export default class App extends Component {
               loadingLaunches={loadingLaunches}
             />
           </div>
-          {loadingLaunches ? (
-            <Loader />
-          ) : (
-            <>
-              <div className="table-addition">
-                <Hint className="hint_mod" imageSrc={star} imageAlt="asterisk">
-                  &nbsp; — click to expand more information about the launch
-                </Hint>
 
-                <Hint
-                  className="d-sm-block d-md-none"
-                  imageSrc={swipe}
-                  imageAlt="icon-swipe"
-                >
-                  &nbsp; — swipe the table to the left
-                </Hint>
-              </div>
-              <ReactPaginate
-                previousLabel={"prev"}
-                nextLabel={"next"}
-                breakLabel={"..."}
-                breakClassName={"break-me"}
-                pageCount={this.state.pageCount}
-                onPageChange={this.handlePageClick}
-                containerClassName={"pagination"}
-                activeClassName={"active"}
-                pageClassName="page-item"
-                pageLinkClassName="page-link"
-                previousClassName="page-item"
-                nextClassName="page-item"
-                previousLinkClassName="page-link"
-                nextLinkClassName="page-link"
-                forcePage={this.state.currentPage}
-              />
-            </>
-          )}
+          <div className="table-addition">
+            <Hint className="hint_mod" imageSrc={star} imageAlt="asterisk">
+              &nbsp; — click to expand more information about the launch
+            </Hint>
+
+            <Hint
+              className="d-sm-block d-md-none"
+              imageSrc={swipe}
+              imageAlt="icon-swipe"
+            >
+              &nbsp; — swipe the table to the left
+            </Hint>
+          </div>
+          <ReactPaginate
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={this.state.pageCount}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            nextClassName="page-item"
+            previousLinkClassName="page-link"
+            nextLinkClassName="page-link"
+            forcePage={this.state.currentPage}
+          />
         </Section>
       </main>
     );
