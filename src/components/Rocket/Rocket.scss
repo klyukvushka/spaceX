@@ -43,8 +43,13 @@
   &__title {
     text-decoration: underline;
     font-size: 24px;
+    margin-bottom: 10px;
     @include desktop-s {
       font-size: 22px;
+    }
+    @include tablet-landscape {
+      display: flex;
+      align-items: center;
     }
     @include tablet-portrait {
       font-size: 20px;
@@ -113,6 +118,10 @@
     &.active {
       .item__features {
         display: block;
+        margin-bottom: 15px;
+      }
+      .arrow-down {
+        transform: rotate(180deg);
       }
     }
   }

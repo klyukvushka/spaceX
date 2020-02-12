@@ -106,12 +106,13 @@ export default class Dragon extends Component {
                 this.state.activeId === 1 ? "active" : ""
               }`}
             >
-              <h4
+              <p
                 className="item__title"
                 onClick={() => this.adaptiveAccordion(1)}
               >
                 General characteristics
-              </h4>
+                <i className="icon arrow-down d-md-block d-lg-none"></i>
+              </p>
 
               <div className="item__features">
                 <div className="item__feature">
@@ -144,12 +145,13 @@ export default class Dragon extends Component {
                 this.state.activeId === 2 ? "active" : ""
               }`}
             >
-              <h4
+              <p
                 className="item__title"
                 onClick={() => this.adaptiveAccordion(2)}
               >
                 Payload characteristics
-              </h4>
+                <i className="icon arrow-down d-md-block d-lg-none"></i>
+              </p>
               <div className="item__features">
                 <div className="item__feature">
                   <div className="item__property">Launch payload mass</div> —

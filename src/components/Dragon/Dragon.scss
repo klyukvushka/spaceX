@@ -18,3 +18,14 @@
     }
   }
 }
+
+.arrow-down {
+  width: 30px;
+  height: 14px;
+  background: url(../../images/icons/arrow-d.svg) no-repeat center;
+  background-size: contain;
+  transition: transform 0.2s ease-in;
+  @include tablet-portrait {
+    width: 20px;
+  }
+}
