@@ -2,9 +2,19 @@
 @import "../../styles/mixins";
 
 .header {
-  background: url(../../images/launch2.jpg) center no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+  &_launches {
+    background-image: url(../../images/launch2.jpg);
+  }
+  &_rockets {
+    background-image: url(../../images/launch3.jpg);
+  }
+  &_dragons {
+    background-image: url(../../images/dragon.jpg);
+  }
   &__content {
     display: flex;
     flex-direction: column;

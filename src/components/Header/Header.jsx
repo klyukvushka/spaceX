@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { request } from "../../requests/request";
 import Loader from "../Loader/Loader";
+import { routerPathes } from "../../routerComponents/routerPathes";
 
 import "./Header.scss";
 
@@ -14,8 +15,12 @@ export default class Header extends Component {
     year: 0,
     mission: "",
     link: "",
-    loading: true
+    loading: true,
+    className: ""
   };
+
+  headerRef = React.createRef();
+
   componentDidMount = async () => {
     try {
       const response = await request.get("/launches", {
@@ -28,6 +33,7 @@ export default class Header extends Component {
       this.setState({ data: data, loading: false });
 
       this.defineLaunchDate();
+      this.addClassNameHeader();
     } catch (error) {
       console.log(error.message);
     }
@@ -66,29 +72,31 @@ export default class Header extends Component {
     this.setState({ mission, link });
   };
 
-  render() {
-    const { loading } = this.state;
+  addClassNameHeader = () => {
+    const currentURLPath = window.location.pathname;
+    routerPathes.map(item => {
+      if (item.path === currentURLPath) {
+        return this.setState({ className: item.name });
+      }
+    });
+  };
 
+  render() {
+    const { loading, className } = this.state;
     return (
-      <header className="header">
+      <header className={`header ${className}`}>
         <div className="container">
           <nav className="navigation">
             <ul className="nav">
-              <li>
-                <NavLink exact to={"/"} className="nav__link">
-                  Launches
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/dragons"} className="nav__link">
-                  Dragons
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={"/rockets"} className="nav__link">
-                  Rockets
-                </NavLink>
-              </li>
+              {routerPathes.map(item => {
+                return (
+                  <li key={item.id}>
+                    <NavLink exact to={item.path} className="nav__link">
+                      {item.content}
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
           <div className="header__content">

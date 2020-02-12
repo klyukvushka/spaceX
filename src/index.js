@@ -7,10 +7,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import App from "./components/App/App";
-import LaunchesPage from "./components/LaunchesPage/LaunchesPage";
-import Dragons from "./components/Dragons/Dragons";
-import Rockets from "./components/Rockets/Rockets";
+import App from "./routerComponents/App/App";
+import LaunchesPage from "./routerComponents/LaunchesPage/LaunchesPage";
+import Dragons from "./routerComponents/Dragons/Dragons";
+import Rockets from "./routerComponents/Rockets/Rockets";
 
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
