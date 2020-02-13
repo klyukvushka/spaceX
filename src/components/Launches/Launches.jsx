@@ -5,7 +5,7 @@ import "./Launches.scss";
 import Section from "../Section/Section";
 import Title from "../Title/Title";
 import Table from "../Table/Table";
-import SearchForm from "../Search/Search";
+// import SearchForm from "../Search/Search";
 import Select from "../Select/Select";
 import Hint from "../Hint/Hint";
 
@@ -58,10 +58,6 @@ export default class App extends Component {
         });
       }
     }
-
-    // const filteredData = response.data.filter(item => {
-    //   return item.launch_success !== null && item.details !== null;
-    // });
   };
 
   // sorting
@@ -174,16 +170,16 @@ export default class App extends Component {
   };
 
   render() {
-    const { data, sort, loadingLaunches, primaryData } = this.state;
+    const { data, sort, loadingLaunches } = this.state;
     return (
       <main className="main">
         <Section className="launch">
           <Title>SpaceX launches</Title>
           <div className="launch__top">
-            <SearchForm
+            {/* <SearchForm
               primaryData={primaryData}
               updateElements={this.updateElements}
-            />
+            /> */}
 
             <Select handleValue={this.handleValue} options={[20, 30, 40]} />
           </div>

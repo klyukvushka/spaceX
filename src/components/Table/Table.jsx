@@ -5,8 +5,19 @@ import "./Table.scss";
 
 export default class Table extends Component {
   state = {
-    selectedItemId: null
+    selectedItemId: null,
+    scrolling: false
   };
+
+  componentDidMount = () => {
+    window.addEventListener("scroll", this.theadOnScroll);
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.theadOnScroll);
+  };
+
+  tableRef = React.createRef();
 
   formatDate = date => {
     let d = new Date(date),
@@ -42,11 +53,21 @@ export default class Table extends Component {
     }));
   };
 
+  theadOnScroll = () => {
+    const tablePosition = this.tableRef.current.getBoundingClientRect().top;
+
+    if (tablePosition < 0) {
+      this.setState({ scrolling: true });
+    } else {
+      this.setState({ scrolling: false });
+    }
+  };
+
   render() {
     const { data, loadingLaunches } = this.props;
     return (
-      <table className="table">
-        <thead>
+      <table className="table" ref={this.tableRef}>
+        <thead className={this.state.scrolling ? "sticky" : ""}>
           <tr>
             <th> №</th>
             <th>Mission Name</th>
@@ -77,8 +98,8 @@ export default class Table extends Component {
                   <td>{item.flight_number}.</td>
                   <td
                     className={
-                      "launch__mission " +
-                      (item.details !== null ? "launch__mission_mod" : "")
+                      "table__mission " +
+                      (item.details !== null ? "table__mission_mod" : "")
                     }
                     onClick={() => this.displayDetails(item.flight_number)}
                   >
