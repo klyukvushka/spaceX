@@ -6,7 +6,9 @@ import "./Table.scss";
 export default class Table extends Component {
   state = {
     selectedItemId: null,
-    scrolling: false
+    scrolling: false,
+    width: "",
+    left: ""
   };
 
   componentDidMount = () => {
@@ -55,19 +57,37 @@ export default class Table extends Component {
 
   theadOnScroll = () => {
     const tablePosition = this.tableRef.current.getBoundingClientRect().top;
-
+    this.theadWidth();
     if (tablePosition < 0) {
       this.setState({ scrolling: true });
     } else {
       this.setState({ scrolling: false });
     }
+
+    if (window.innerWidth <= 767) {
+      const left = this.tableRef.current.scrollLeft;
+
+      this.setState({ left: left });
+    }
+  };
+
+  theadWidth = () => {
+    const tableWidth = this.tableRef.current.getBoundingClientRect().width;
+    this.setState({
+      width: tableWidth
+    });
   };
 
   render() {
     const { data, loadingLaunches } = this.props;
+    const { width, left } = this.state;
+
     return (
       <table className="table" ref={this.tableRef}>
-        <thead className={this.state.scrolling ? "sticky" : ""}>
+        <thead
+          className={this.state.scrolling ? "sticky" : ""}
+          style={{ width: width + "px", left: -left + "px" }}
+        >
           <tr>
             <th> №</th>
             <th>Mission Name</th>
