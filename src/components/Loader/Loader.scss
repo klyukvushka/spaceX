@@ -1,3 +1,6 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
 .loader {
   width: 100%;
   text-align: center;
@@ -32,6 +35,15 @@
   border: 6px solid #b6d2fd;
   border-color: #b6d2fd transparent #b6d2fd transparent;
   animation: lds-dual-ring 1.2s linear infinite;
+  @include tablet-portrait {
+    width: 44px;
+    height: 44px;
+  }
+  @include phone {
+    width: 34px;
+    height: 34px;
+    border-width: 4px;
+  }
 }
 @keyframes lds-dual-ring {
   0% {

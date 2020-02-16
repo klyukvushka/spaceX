@@ -30,6 +30,7 @@
     }
     .loader-tr {
       background-color: #ffffff !important;
+      height: 55px;
     }
   }
   td {
@@ -74,8 +75,8 @@
   display: table;
   position: fixed;
   top: 0;
-  width: 100%;
   z-index: 4;
+  overflow-x: scroll;
 }
 
 .icon {

@@ -65,8 +65,8 @@ export default class Table extends Component {
     }
 
     if (window.innerWidth <= 767) {
-      const left = this.tableRef.current.scrollLeft;
-
+      const left = this.tableRef.current.parentNode.scrollLeft;
+      console.log(left);
       this.setState({ left: left });
     }
   };
