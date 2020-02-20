@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Rocket from "../../components/Rocket/Rocket";
 import Section from "../../components/Section/Section";
 import Title from "../../components/Title/Title";
@@ -12,6 +13,9 @@ import starship from "../../images/starship.png";
 const Rockets = () => {
   return (
     <>
+      <Helmet>
+        <title>Rockets</title>
+      </Helmet>
       <Header />
       <Section className="rockets">
         <Title>SpaceX rockets</Title>

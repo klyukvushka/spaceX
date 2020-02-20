@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Dragon from "../../components/Dragon/Dragon";
 import Section from "../../components/Section/Section";
 import Header from "../../components/Header/Header";
@@ -9,6 +10,9 @@ import dragon2 from "../../images/dragon2.jpg";
 const Dragons = () => {
   return (
     <>
+      <Helmet>
+        <title>Dragons</title>
+      </Helmet>
       <Header />
       <Section className="dragons">
         <Title>SpaceX dragons</Title>
