@@ -1,13 +1,28 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
-.sorting-form {
+.sorting {
   // margin-left: 15px;
+  display: flex;
   color: darken($color2, 15%);
   @include phone {
     margin-left: 0;
   }
 }
 
-.select {
-  margin-left: 7px;
+.select-custom {
+  position: relative;
+  .select {
+    outline: none;
+    border: 1px solid transparent;
+    width: 37px;
+    padding-left: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-weight: bold;
+    color: $color1;
+    &::-ms-expand {
+      display: none;
+    }
+  }
 }

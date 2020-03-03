@@ -14,9 +14,9 @@ export default class Select extends Component {
   render() {
     const { options } = this.props;
     return (
-      <form className="sorting-form">
-        <label>
-          Display:
+      <div className="sorting">
+        <label>Display:</label>
+        <div className="select-custom">
           <select
             className="select"
             value={this.state.value}
@@ -32,8 +32,8 @@ export default class Select extends Component {
               );
             })}
           </select>
-        </label>
-      </form>
+        </div>
+      </div>
     );
   }
 }

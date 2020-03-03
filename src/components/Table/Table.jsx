@@ -11,15 +11,15 @@ export default class Table extends Component {
     left: ""
   };
 
-  componentDidMount = () => {
-    window.addEventListener("scroll", this.theadOnScroll);
-  };
+  // componentDidMount = () => {
+  //   window.addEventListener("scroll", this.theadOnScroll);
+  // };
 
-  componentWillUnmount = () => {
-    window.removeEventListener("scroll", this.theadOnScroll);
-  };
+  // componentWillUnmount = () => {
+  //   window.removeEventListener("scroll", this.theadOnScroll);
+  // };
 
-  tableRef = React.createRef();
+  // tableRef = React.createRef();
 
   formatDate = date => {
     let d = new Date(date),
@@ -55,38 +55,38 @@ export default class Table extends Component {
     }));
   };
 
-  theadOnScroll = () => {
-    const tablePosition = this.tableRef.current.getBoundingClientRect().top;
-    this.theadWidth();
-    if (tablePosition < 0) {
-      this.setState({ scrolling: true });
-    } else {
-      this.setState({ scrolling: false });
-    }
+  // theadOnScroll = () => {
+  //   const tablePosition = this.tableRef.current.getBoundingClientRect().top;
+  //   this.theadWidth();
+  //   if (tablePosition < 0) {
+  //     this.setState({ scrolling: true });
+  //   } else {
+  //     this.setState({ scrolling: false });
+  //   }
 
-    if (window.innerWidth <= 767) {
-      const left = this.tableRef.current.parentNode.scrollLeft;
-      console.log(left);
-      this.setState({ left: left });
-    }
-  };
+  //   if (window.innerWidth <= 767) {
+  //     const left = this.tableRef.current.parentNode.scrollLeft;
+  //     console.log(left);
+  //     this.setState({ left: left });
+  //   }
+  // };
 
-  theadWidth = () => {
-    const tableWidth = this.tableRef.current.getBoundingClientRect().width;
-    this.setState({
-      width: tableWidth
-    });
-  };
+  // theadWidth = () => {
+  //   const tableWidth = this.tableRef.current.getBoundingClientRect().width;
+  //   this.setState({
+  //     width: tableWidth
+  //   });
+  // };
 
   render() {
     const { data, loadingLaunches } = this.props;
-    const { width, left } = this.state;
+    // const { width, left } = this.state;
 
     return (
       <table className="table" ref={this.tableRef}>
         <thead
-          className={this.state.scrolling ? "sticky" : ""}
-          style={{ width: width + "px", left: -left + "px" }}
+        // className={this.state.scrolling ? "sticky" : ""}
+        // style={{ width: width + "px", left: -left + "px" }}
         >
           <tr>
             <th> №</th>
