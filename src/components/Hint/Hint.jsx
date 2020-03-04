@@ -25,7 +25,7 @@ Hint.defaultProps = {
   children: "text",
   className: "",
   imageSrc: "",
-  imgAlt: ""
+  imgAlt: "img"
 };
 
 export default Hint;

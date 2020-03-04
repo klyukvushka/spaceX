@@ -1,159 +1,101 @@
-import React, { Component } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { request } from "../../requests/request";
+import PropTypes from "prop-types";
 import Loader from "../Loader/Loader";
 import { routerPathes } from "../../routerComponents/routerPathes";
 
 import "./Header.scss";
 
-export default class Header extends Component {
-  state = {
-    data: [],
-    upcomingLaunch: {},
-    day: 0,
-    month: 0,
-    year: 0,
-    mission: "",
-    link: "",
-    loading: true,
-    className: ""
-  };
+const Header = props => {
+  const { className, loading, link, mission, day, month, year } = props;
 
-  headerRef = React.createRef();
+  return (
+    <header className={`header ${className}`}>
+      <div className="container">
+        <nav className="navigation">
+          <ul className="nav">
+            {routerPathes.map(item => {
+              return (
+                <li key={item.id}>
+                  <NavLink exact to={item.path} className="nav__link">
+                    {item.content}
+                  </NavLink>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        <div className="header__content">
+          <h1 className="section-title section-title_header">
+            Upcoming launch
+          </h1>
 
-  componentDidMount = async () => {
-    try {
-      const response = await request.get("/launches", {
-        params: { order: "desc" }
-      });
+          <div className="launching-info">
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                <a
+                  href={link}
+                  className="header__subtitle"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Mission {mission}
+                </a>
 
-      const data = response.data.filter(item => {
-        return item.upcoming === true;
-      });
-      this.setState({ data: data, loading: false });
-
-      this.defineLaunchDate();
-      this.addClassNameHeader();
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  defineLaunchDate = () => {
-    const today = new Date();
-    const upcomingLaunch = this.state.data.reduce((a, b) =>
-      a.Date - today < b.Date - today ? a : b
-    );
-    this.setState({ upcomingLaunch });
-    this.formateDate();
-    this.setMissionLink();
-  };
-
-  formateDate = () => {
-    const formatedDate = new Date(this.state.upcomingLaunch.launch_date_utc);
-
-    let formatedMonth = "" + (formatedDate.getMonth() + 1);
-    let formatedDay = "" + formatedDate.getDate();
-    const formatedYear = formatedDate.getFullYear();
-
-    if (formatedMonth.length < 2) formatedMonth = "0" + formatedMonth;
-    if (formatedDay.length < 2) formatedDay = "0" + formatedDay;
-
-    this.setState({
-      day: formatedDay,
-      month: formatedMonth,
-      year: formatedYear
-    });
-  };
-
-  setMissionLink = () => {
-    const mission = this.state.upcomingLaunch.mission_name;
-    const link = this.state.upcomingLaunch.links.reddit_campaign;
-    this.setState({ mission, link });
-  };
-
-  addClassNameHeader = () => {
-    const currentURLPath = window.location.pathname;
-    routerPathes.map(item => {
-      if (item.path === currentURLPath) {
-        return this.setState({ className: item.name });
-      }
-    });
-  };
-
-  render() {
-    const { loading, className } = this.state;
-    return (
-      <header className={`header ${className}`}>
-        <div className="container">
-          <nav className="navigation">
-            <ul className="nav">
-              {routerPathes.map(item => {
-                return (
-                  <li key={item.id}>
-                    <NavLink exact to={item.path} className="nav__link">
-                      {item.content}
-                    </NavLink>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-          <div className="header__content">
-            <h1 className="section-title section-title_header">
-              Upcoming launch
-            </h1>
-
-            <div className="launching-info">
-              {loading ? (
-                <Loader />
-              ) : (
-                <>
+                <div className="launching">
+                  <h3 className="launching__title">Launching on </h3>
+                  <div className="launching__wrapper">
+                    <div className="launching__content">
+                      {day}
+                      <span className="launching__span">day</span>
+                    </div>
+                    <div className="launching__content">
+                      {month}
+                      <span className="launching__span">month</span>
+                    </div>
+                    <div className="launching__content">
+                      {year}
+                      <span className="launching__span">year</span>
+                    </div>
+                  </div>
                   <a
-                    href={this.state.link}
-                    className="header__subtitle"
+                    href="https://www.youtube.com/channel/UCtI0Hodo5o5dUb67FeUjDeA"
+                    className="launching__link"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Mission {this.state.mission}
+                    Remind me
                   </a>
-
-                  <div className="launching">
-                    <h3 className="launching__title">Launching on </h3>
-                    <div className="launching__wrapper">
-                      <div className="launching__content">
-                        {this.state.day}
-                        <span className="launching__span">day</span>
-                      </div>
-                      <div className="launching__content">
-                        {this.state.month}
-                        <span className="launching__span">month</span>
-                      </div>
-                      <div className="launching__content">
-                        {this.state.year}
-                        <span className="launching__span">year</span>
-                      </div>
-                    </div>
-                    <a
-                      href="https://www.youtube.com/channel/UCtI0Hodo5o5dUb67FeUjDeA"
-                      className="launching__link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Remind me
-                    </a>
-                    <p className="launching__description">
-                      Subscribe to the SpaceX channel on Youtube. All launches
-                      broadcasts are held here. Click on the bell to receive
-                      notifications
-                    </p>
-                  </div>
-                </>
-              )}
-            </div>
+                  <p className="launching__description">
+                    Subscribe to the SpaceX channel on Youtube. All launches
+                    broadcasts are held here. Click on the bell to receive
+                    notifications
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
-      </header>
-    );
-  }
-}
+      </div>
+    </header>
+  );
+};
+
+Header.propTypes = {
+  className: PropTypes.string,
+  loading: PropTypes.bool,
+  link: PropTypes.string,
+  mission: PropTypes.string,
+  day: PropTypes.string,
+  month: PropTypes.string,
+  year: PropTypes.number
+};
+
+Header.defaultProps = {
+  className: "header_launches",
+  loading: true
+};
+
+export default Header;

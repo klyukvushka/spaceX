@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Header from "../../components/Header/Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 import Launches from "../../components/Launches/Launches";
 
 const LaunchesPage = () => {
@@ -9,7 +9,7 @@ const LaunchesPage = () => {
       <Helmet>
         <title>Launches</title>
       </Helmet>
-      <Header />
+      <HeaderContainer />
       <article className="content">
         <Launches />
       </article>

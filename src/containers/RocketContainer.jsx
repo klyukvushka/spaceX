@@ -73,7 +73,6 @@ export default class RocketContainer extends Component {
         description={description}
         videoId={videoId}
         imgSrc={imgSrc}
-        formatDate={this.formatDate}
       />
     );
   }

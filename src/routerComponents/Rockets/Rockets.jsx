@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import Section from "../../components/Section/Section";
 import Title from "../../components/Title/Title";
-import Header from "../../components/Header/Header";
+import HeaderContainer from "../../containers/HeaderContainer";
 import RocketContainer from "../../containers/RocketContainer";
 
 import falcon1 from "../../images/falcon1.jpg";
@@ -16,7 +16,7 @@ const Rockets = () => {
       <Helmet>
         <title>Rockets</title>
       </Helmet>
-      <Header />
+      <HeaderContainer />
       <Section className="rockets">
         <Title>SpaceX rockets</Title>
         <div className="items">

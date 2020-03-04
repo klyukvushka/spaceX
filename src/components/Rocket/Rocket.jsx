@@ -75,3 +75,8 @@ Rocket.propTypes = {
   mass: PropTypes.number,
   diameter: PropTypes.number
 };
+
+Rocket.defaultProps = {
+  name: "Rocket",
+  description: ""
+};

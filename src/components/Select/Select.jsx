@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import "./Select.scss";
 
 export default class Select extends Component {
@@ -37,3 +38,11 @@ export default class Select extends Component {
     );
   }
 }
+
+Select.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.number)
+};
+
+Select.defaultProps = {
+  options: [20, 30]
+};

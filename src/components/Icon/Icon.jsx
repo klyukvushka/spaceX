@@ -27,7 +27,7 @@ Icon.propTypes = {
 Icon.defaultProps = {
   className: "",
   src: "",
-  alt: "",
+  alt: "icon",
   width: "",
   height: ""
 };
