@@ -70,7 +70,10 @@ export default class HeaderContainer extends Component {
   };
 
   addClassNameHeader = () => {
-    const currentURLPath = window.location.pathname;
+    const currentURLHref = window.location.href;
+    const currentURLPath = currentURLHref.substring(
+      currentURLHref.lastIndexOf("/") + 1
+    );
     routerPathes.map(item => {
       if (item.path === currentURLPath) {
         return this.setState({ className: item.name });
