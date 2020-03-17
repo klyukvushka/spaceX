@@ -25,8 +25,7 @@ const Dragon = props => {
     returnPayloadVol,
     imgSrc,
     videoId,
-    activeId,
-    adaptiveAccordion
+    activeId
   } = props;
 
   return (
