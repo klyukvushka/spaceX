@@ -119,7 +119,7 @@ const Dragon = props => {
 };
 
 Dragon.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   videoId: PropTypes.string,
   imgSrc: PropTypes.string,
   name: PropTypes.string,

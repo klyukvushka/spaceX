@@ -5,20 +5,31 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100vh;
   &_launches {
     background-image: url(../../images/launch2.jpg);
   }
   &_rockets {
     background-image: url(../../images/launch3.jpg);
+    .section-title_header {
+      color: #1b0df1;
+    }
   }
   &_dragons {
-    background-image: url(../../images/dragon.jpg);
+    background-image: url(../../images/dra.jpg);
+    .section-title_header {
+      color: #3ba4ff;
+    }
   }
   &__content {
     display: flex;
     flex-direction: column;
     margin-top: 125px;
+    margin-bottom: 60px;
+    @include phone {
+      margin-top: 83px;
+    }
   }
 
   &__subtitle {
